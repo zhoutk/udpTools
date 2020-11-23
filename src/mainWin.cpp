@@ -1,9 +1,9 @@
 #include "mainWin.h"
-#include "./ui_mainWin.h"
 
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
+    , udpTimer(this)
 {
     ui->setupUi(this);
     ui->ipAddress->setFocus();
@@ -11,6 +11,18 @@ MainWin::MainWin(QWidget *parent)
 
 	connect(ui->btnStart, SIGNAL(clicked()), this, SLOT(BtnStartClicked()));
 	connect(ui->btnStop, SIGNAL(clicked()), this, SLOT(BtnStopClicked()));
+    connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnSpinChange(int)));
+
+	connect(&udpTimer, SIGNAL(timeout()), this, SLOT(SendUdpPackageOnTime()));
+    udpTimer.start(ui->spinBox->text().toInt() * 1000);
+}
+
+void MainWin::SendUdpPackageOnTime() {
+	
+}
+
+void MainWin::BtnSpinChange(int value) {
+
 }
 
 void MainWin::BtnStartClicked() {
