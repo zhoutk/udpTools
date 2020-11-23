@@ -27,7 +27,8 @@ void MainWin::SendUdpPackageOnTime() {
 }
 
 void MainWin::BtnSpinChange(int value) {
-
+    udpTimer.stop();
+    udpTimer.start(ui->spinBox->text().toInt() * 1000);
 }
 
 void MainWin::BtnStartClicked() {

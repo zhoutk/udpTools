@@ -10,6 +10,18 @@
     <height>155</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>372</width>
+    <height>155</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>372</width>
+    <height>155</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>UdpToos</string>
   </property>
