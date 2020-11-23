@@ -7,7 +7,7 @@
 
 class QUdpSocket;
 
-typedef void (*DatagramProcessor)(QByteArray &data, void * usrParam);
+typedef void (*DatagramProcessor)(QByteArray &data);
 
 class UDPTransceiver : public QObject
 {
@@ -20,7 +20,7 @@ public:
 	// For broadcasting.
 	UDPTransceiver(QObject *parent, unsigned int port);
 	~UDPTransceiver();
-	void SetDatagramProcessor(DatagramProcessor dp, void * usrParam);
+	void SetDatagramProcessor(DatagramProcessor dp);
 	void SendDataNow(QByteArray data, QString addr, int port);
 
 	static QByteArray GetNextMsg(QByteArray &dataBuf, QByteArray &header);
@@ -42,7 +42,6 @@ private:
 	unsigned int m_port;
 	QHostAddress m_localAddress;
 	DatagramProcessor m_processor;
-	void * m_usrParam;
 };
 
 

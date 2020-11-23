@@ -5,16 +5,16 @@
 #include "udptransceiver.h"
 
 UDPTransceiver::UDPTransceiver(QObject *parent)
-	: QObject(parent),m_udpSocket(0),m_port(0),m_processor(0),m_usrParam(0)
+	: QObject(parent),m_udpSocket(0),m_port(0),m_processor(0)
 {
 	m_udpSocket = new QUdpSocket();
-	connect(this, SIGNAL(DataSendPending()),this, SLOT(DoSendData()));
-	connect(m_udpSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, 
+	connect(this, SIGNAL(DataSendPending()), this, SLOT(DoSendData()));
+	connect(m_udpSocket, SIGNAL(error(QAbstractSocket::SocketError)), this,
 		SLOT(SocketError(QAbstractSocket::SocketError)));
 }
 
 UDPTransceiver::UDPTransceiver(QObject *parent, unsigned int port)
-	: QObject(parent),m_udpSocket(0),m_port(port),m_processor(0),m_usrParam(0)
+	: QObject(parent),m_udpSocket(0),m_port(port),m_processor(0)
 {
 	m_udpSocket = new QUdpSocket();
 	m_udpSocket->bind(port, QUdpSocket::ShareAddress);
@@ -24,7 +24,7 @@ UDPTransceiver::UDPTransceiver(QObject *parent, unsigned int port)
 }
 
 UDPTransceiver::UDPTransceiver(QObject *parent,const char* address, unsigned int port)
-	: QObject(parent),m_udpSocket(0),m_port(port),m_processor(0),m_usrParam(0)
+	: QObject(parent),m_udpSocket(0),m_port(port),m_processor(0)
 {
 	m_udpSocket = new QUdpSocket();
 	m_localAddress = QHostAddress(address);
@@ -40,13 +40,13 @@ UDPTransceiver::UDPTransceiver(QObject *parent,const char* address, unsigned int
 
 UDPTransceiver::~UDPTransceiver()
 {
-
+	m_udpSocket->close();
+	delete m_udpSocket;
 }
 
-void UDPTransceiver::SetDatagramProcessor(DatagramProcessor dp, void * usrParam)
+void UDPTransceiver::SetDatagramProcessor(DatagramProcessor dp)
 {
 	m_processor = dp;
-	m_usrParam = usrParam;
 }
 
 QByteArray UDPTransceiver::GetNextMsg(QByteArray &dataBuf, QByteArray &header)
@@ -132,7 +132,7 @@ void UDPTransceiver::ProcessPendingDatagrams()
 		datagram.resize(m_udpSocket->pendingDatagramSize());
 		m_udpSocket->readDatagram(datagram.data(), datagram.size());
 		if(m_processor)
-			m_processor(datagram, m_usrParam);
+			m_processor(datagram);
 		//qDebug() << "UDP package received: " << datagram;
 	}
 }

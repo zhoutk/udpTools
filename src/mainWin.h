@@ -4,6 +4,8 @@
 #include "./ui_mainWin.h"
 #include <QWidget>
 #include <QTimer>
+#include "QByteArray"
+#include "network/udptransceiver.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWin; }
@@ -26,5 +28,6 @@ public slots:
 private:
     Ui::MainWin*ui;
     QTimer udpTimer;
+    UDPTransceiver* udpTransceiver;
 };
 #endif // MAINWIN_H
