@@ -1,10 +1,14 @@
 #ifndef MAINWIN_H
 #define MAINWIN_H
 
+#define _USE_MATH_DEFINES
+
 #include "./ui_mainWin.h"
 #include <QWidget>
 #include <QTimer>
 #include <QTime>
+#include <QtMath>
+#include "math.h"
 #include "QByteArray"
 #include "network/udptransceiver.h"
 
@@ -32,5 +36,6 @@ private:
     UDPTransceiver* udpTransceiver;
     double lon;
     double lat;
+    double speeDeta;
 };
 #endif // MAINWIN_H

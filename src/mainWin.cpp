@@ -5,7 +5,7 @@ static void ParseDatagrams(QByteArray& d);
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-    , udpTimer(this), lon(61.0), lat(-32.5)
+    , udpTimer(this), lon(61.0), lat(-32.5), speeDeta(0.0001)
 {
     ui->setupUi(this);
     ui->ipAddress->setFocus();
@@ -38,8 +38,8 @@ void MainWin::SendUdpPackageOnTime() {
 
     s << (int)(lon * 600000.0);
     s << (int)(lat * 600000.0);
-	lon += 0.001;
-	lat += 0.001;
+	lon += qSin(ui->direction->text().toDouble() * M_PI / 180) * speeDeta * ui->speed->text().toDouble();
+	lat += qCos(ui->direction->text().toDouble() * M_PI / 180) * speeDeta * ui->speed->text().toDouble();
 
 	const char height[] = { 0x00, 0x00, 0x00, 0x2e };            
 	s.writeRawData(height, 4);
