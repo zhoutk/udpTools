@@ -5,7 +5,7 @@ static void ParseDatagrams(QByteArray& d);
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-    , udpTimer(this)
+    , udpTimer(this), lon(61.0), lat(-32.5)
 {
     ui->setupUi(this);
     ui->ipAddress->setFocus();
@@ -22,7 +22,48 @@ MainWin::MainWin(QWidget *parent)
 }
 
 void MainWin::SendUdpPackageOnTime() {
-    QByteArray data = "test data.";
+    QByteArray data;
+    QDataStream s(&data, QIODevice::WriteOnly);
+
+	const char head[] = { 0x90, 0x26 };
+	s.writeRawData(head, 2);
+	const char len[] = { 0x00, 0x44 };
+	s.writeRawData(len, 2);
+	const char sender[] = { 0x00, 0x00, 0x90, 0x01 };
+	s.writeRawData(sender, 4);
+	const char recver[] = { 0xFF, 0xFF, 0xFF, 0xFF };
+	s.writeRawData(recver, 4);
+	const char gpsState[] = { 0x00, 0x01, 0x00, 0x00 };             //add memo
+	s.writeRawData(gpsState, 4);
+
+    s << (int)(lon * 600000.0);
+    s << (int)(lat * 600000.0);
+	lon += 0.001;
+	lat += 0.001;
+
+	const char height[] = { 0x00, 0x00, 0x00, 0x2e };            
+	s.writeRawData(height, 4);
+
+    QTime nTime = QTime::currentTime();
+
+	s << (short)nTime.hour();
+	s << (short)nTime.minute();
+	s << (short)nTime.second();
+
+	const char speedState[] = { 0x00, 0x01 };
+	s.writeRawData(speedState, 2);
+
+	const char speedToWater[] = { 0x00, 0x00, 0x00, 0x02 };
+	s.writeRawData(speedToWater, 4);
+
+	s << (int)(ui->speed->text().toInt());			//speed to ground
+
+	const char drectionToGroud[] = { 0x00, 0x00, 0x00, 0x00 };
+	s.writeRawData(drectionToGroud, 4);
+
+	const char lastGroup[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+	s.writeRawData(lastGroup, 20);
+
     udpTransceiver->SendDataNow(data, ui->ipAddress->text(), ui->ipPort->text().toInt());
 }
 

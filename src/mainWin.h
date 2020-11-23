@@ -4,6 +4,7 @@
 #include "./ui_mainWin.h"
 #include <QWidget>
 #include <QTimer>
+#include <QTime>
 #include "QByteArray"
 #include "network/udptransceiver.h"
 
@@ -29,5 +30,7 @@ private:
     Ui::MainWin*ui;
     QTimer udpTimer;
     UDPTransceiver* udpTransceiver;
+    double lon;
+    double lat;
 };
 #endif // MAINWIN_H

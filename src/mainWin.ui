@@ -58,7 +58,7 @@
        <item>
         <widget class="QLineEdit" name="ipAddress">
          <property name="text">
-          <string>224.2.3.2</string>
+          <string>224.3.4.2</string>
          </property>
         </widget>
        </item>
