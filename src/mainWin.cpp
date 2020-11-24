@@ -5,11 +5,14 @@ static void ParseDatagrams(QByteArray& d);
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-    , udpTimer(this), lon(61.0), lat(-32.5), speeDeta(0.0001)
+    , udpTimer(this), speeDeta(0.0001)
 {
     ui->setupUi(this);
     ui->ipAddress->setFocus();
     ui->btnStop->setEnabled(false);
+
+	lon = ui->Lon->text().toDouble();
+	lat = ui->Lat->text().toDouble();
 
 	connect(ui->btnStart, SIGNAL(clicked()), this, SLOT(BtnStartClicked()));
 	connect(ui->btnStop, SIGNAL(clicked()), this, SLOT(BtnStopClicked()));
@@ -58,8 +61,7 @@ void MainWin::SendUdpPackageOnTime() {
 
 	s << (int)(ui->speed->text().toInt());			//speed to ground
 
-	const char drectionToGroud[] = { 0x00, 0x00, 0x00, 0x00 };
-	s.writeRawData(drectionToGroud, 4);
+	s << (int)(ui->direction->text().toInt());		//drection to groud
 
 	const char lastGroup[] = { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 	s.writeRawData(lastGroup, 20);
@@ -75,6 +77,9 @@ void MainWin::BtnSpinChange(int value) {
 void MainWin::BtnStartClicked() {
     ui->btnStart->setEnabled(false);
     ui->btnStop->setEnabled(true);
+
+	lon = ui->Lon->text().toDouble();
+	lat = ui->Lat->text().toDouble();
 
 	udpTimer.start(ui->spinBox->text().toInt() * 1000);
 }

@@ -70,7 +70,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lat">
+        <widget class="QLineEdit" name="Lat">
          <property name="text">
           <string>-32.5</string>
          </property>
@@ -197,7 +197,7 @@
   <tabstop>ipAddress</tabstop>
   <tabstop>ipPort</tabstop>
   <tabstop>Lon</tabstop>
-  <tabstop>lat</tabstop>
+  <tabstop>Lat</tabstop>
   <tabstop>speed</tabstop>
   <tabstop>direction</tabstop>
   <tabstop>spinBox</tabstop>
