@@ -5,23 +5,72 @@ static void ParseDatagrams(QByteArray& d);
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-    , udpTimer(this), speeDeta(0.0001)
+	, speeDeta(0.0001), udpTimer(this), radarUdpTimer(this)
 {
     ui->setupUi(this);
+	udpTransceiver = new UDPTransceiver(this);
+	udpTransceiver->SetDatagramProcessor(ParseDatagrams);
     ui->ipAddress->setFocus();
     ui->btnStop->setEnabled(false);
+	ui->btnRadarStop->setEnabled(false);
+	ui->btnAisStop->setEnabled(false);
 
 	lon = ui->Lon->text().toDouble();
 	lat = ui->Lat->text().toDouble();
-
 	connect(ui->btnStart, SIGNAL(clicked()), this, SLOT(BtnStartClicked()));
 	connect(ui->btnStop, SIGNAL(clicked()), this, SLOT(BtnStopClicked()));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnSpinChange(int)));
-
-	udpTransceiver = new UDPTransceiver(this);
-    udpTransceiver->SetDatagramProcessor(ParseDatagrams);
-
 	connect(&udpTimer, SIGNAL(timeout()), this, SLOT(SendUdpPackageOnTime()));
+
+	connect(ui->btnRadarStart, SIGNAL(clicked()), this, SLOT(BtnRadarStartClicked()));
+	connect(ui->btnRadarStop, SIGNAL(clicked()), this, SLOT(BtnRadarStopClicked()));
+	connect(ui->radarSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnRadarSpinChange(int)));
+	connect(&radarUdpTimer, SIGNAL(timeout()), this, SLOT(RadarSendUdpPackageOnTime()));
+}
+
+void MainWin::BtnRadarStartClicked() {
+	ui->btnRadarStart->setEnabled(false);
+	ui->btnRadarStop->setEnabled(true);
+
+	radarUdpTimer.start(ui->radarSpinBox->text().toInt() * 1000);
+}
+
+void MainWin::BtnRadarStopClicked() {
+	ui->btnRadarStop->setEnabled(false);
+	ui->btnRadarStart->setEnabled(true);
+
+	radarUdpTimer.stop();
+}
+
+void MainWin::RadarSendUdpPackageOnTime() {
+	QStringList idstr = ui->radarId->text().split("_");
+	int id = idstr[1].toInt();
+	QString dataPacket = QString("UdPbC0\s:RA%1,n:%2*HH\$GETTM,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15,%16,%17*hh\r\n")
+		.arg(ui->radarId->text().remove("_"))
+		.arg(id)
+		.arg(id)
+		.arg(ui->radarSpeed->text().toInt() * 1000)											//2，距离
+		.arg(ui->RadarDirection->text()) 										//3，方位
+		.arg("T")										//4，绝对，相对
+		.arg(6)												//5，速度
+		.arg(45)		//6，航向
+		.arg("R")		//7，绝对，相对航向指示
+		.arg("0.01")		//8，CPA
+		.arg("0.02")	//9，TCPA
+		.arg("N")		//10，目标速度距离单位
+		.arg("")			//11，目标名称
+		.arg("L")		//12，航迹状态
+		.arg("")			//13，未用
+		.arg("")				//14，时间
+		.arg("A")			//15，目标数据捕获类型
+		;
+
+	udpTransceiver->SendDataNow(dataPacket.toUtf8().data(), ui->radarIpAddress->text(), ui->radarIpPort->text().toInt());
+}
+
+void MainWin::BtnRadarSpinChange(int value) {
+	radarUdpTimer.stop();
+	radarUdpTimer.start(ui->radarSpinBox->text().toInt() * 1000);
 }
 
 void MainWin::SendUdpPackageOnTime() {

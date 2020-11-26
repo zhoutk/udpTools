@@ -30,6 +30,11 @@ public slots:
     void SendUdpPackageOnTime();
     void BtnSpinChange(int);
 
+	void BtnRadarStartClicked();
+	void BtnRadarStopClicked();
+	void RadarSendUdpPackageOnTime();
+	void BtnRadarSpinChange(int);
+
 private:
     Ui::MainWin*ui;
     QTimer udpTimer;
@@ -37,5 +42,7 @@ private:
     double lon;
     double lat;
     double speeDeta;
+
+	QTimer radarUdpTimer;
 };
 #endif // MAINWIN_H
