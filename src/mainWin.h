@@ -32,6 +32,7 @@ public slots:
 
 	void BtnRadarStartClicked();
 	void BtnRadarStopClicked();
+	void BtnRadarCreateClicked();
 	void RadarSendUdpPackageOnTime();
 	void BtnRadarSpinChange(int);
 

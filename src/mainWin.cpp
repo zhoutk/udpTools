@@ -26,6 +26,14 @@ MainWin::MainWin(QWidget *parent)
 	connect(ui->btnRadarStop, SIGNAL(clicked()), this, SLOT(BtnRadarStopClicked()));
 	connect(ui->radarSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnRadarSpinChange(int)));
 	connect(&radarUdpTimer, SIGNAL(timeout()), this, SLOT(RadarSendUdpPackageOnTime()));
+	connect(ui->btnRadarNew, SIGNAL(clicked()), this, SLOT(BtnRadarCreateClicked()));
+}
+
+void MainWin::BtnRadarCreateClicked() {
+	QStringList idstr = ui->radarId->text().split("_");
+	int id = idstr[1].toInt();
+	QString str = QString("%1").arg(id + 1, 4, 10, QLatin1Char('0'));
+	ui->radarId->setText(QString("RA_").append(str));
 }
 
 void MainWin::BtnRadarStartClicked() {
