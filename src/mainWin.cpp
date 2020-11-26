@@ -5,7 +5,7 @@ static void ParseDatagrams(QByteArray& d);
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-	, speeDeta(0.0001), udpTimer(this), radarUdpTimer(this)
+	, speeDeta(0.0001), udpTimer(this), radarUdpTimer(this), aisUdpTimer(this)
 {
     ui->setupUi(this);
 	udpTransceiver = new UDPTransceiver(this);
@@ -27,6 +27,66 @@ MainWin::MainWin(QWidget *parent)
 	connect(ui->radarSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnRadarSpinChange(int)));
 	connect(&radarUdpTimer, SIGNAL(timeout()), this, SLOT(RadarSendUdpPackageOnTime()));
 	connect(ui->btnRadarNew, SIGNAL(clicked()), this, SLOT(BtnRadarCreateClicked()));
+
+	aisLon = ui->aisLon->text().toDouble();
+	aisLat = ui->aisLat->text().toDouble();
+	connect(ui->btnAisStart, SIGNAL(clicked()), this, SLOT(BtnAisStartClicked()));
+	connect(ui->btnAisStop, SIGNAL(clicked()), this, SLOT(BtnAisStopClicked()));
+	connect(ui->aisSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnAisSpinChange(int)));
+	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpPackageOnTime()));
+	connect(ui->btnAisNew, SIGNAL(clicked()), this, SLOT(BtnAisCreateClicked()));
+}
+
+void MainWin::BtnAisCreateClicked() {
+	QStringList idstr = ui->aisId->text().split("_");
+	int id = idstr[1].toInt();
+	QString str = QString("%1").arg(id + 1, 4, 10, QLatin1Char('0'));
+	ui->aisId->setText(QString("AIS_").append(str));
+}
+
+void MainWin::BtnAisStartClicked() {
+	ui->btnAisStart->setEnabled(false);
+	ui->btnAisStop->setEnabled(true);
+
+	aisUdpTimer.start(ui->aisSpinBox->text().toInt() * 1000);
+}
+
+void MainWin::BtnAisStopClicked() {
+	ui->btnAisStop->setEnabled(false);
+	ui->btnAisStart->setEnabled(true);
+
+	aisUdpTimer.stop();
+}
+
+void MainWin::AisSendUdpPackageOnTime() {
+	//QStringList idstr = ui->radarId->text().split("_");
+	//int id = idstr[1].toInt();
+	//QString dataPacket = QString("UdPbC0\s:RA%1,n:%2*HH\$GETTM,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15,%16,%17*hh\r\n")
+	//	.arg(ui->radarId->text().remove("_"))
+	//	.arg(id)
+	//	.arg(id)
+	//	.arg(ui->radarSpeed->text().toInt() * 1000)											//2，距离
+	//	.arg(ui->RadarDirection->text()) 										//3，方位
+	//	.arg("T")										//4，绝对，相对
+	//	.arg(6)												//5，速度
+	//	.arg(45)		//6，航向
+	//	.arg("R")		//7，绝对，相对航向指示
+	//	.arg("0.01")		//8，CPA
+	//	.arg("0.02")	//9，TCPA
+	//	.arg("N")		//10，目标速度距离单位
+	//	.arg("")			//11，目标名称
+	//	.arg("L")		//12，航迹状态
+	//	.arg("")			//13，未用
+	//	.arg("")				//14，时间
+	//	.arg("A")			//15，目标数据捕获类型
+	//	;
+
+	udpTransceiver->SendDataNow(QString("ais").toUtf8().data(), ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
+}
+
+void MainWin::BtnAisSpinChange(int value) {
+	aisUdpTimer.stop();
+	aisUdpTimer.start(ui->aisSpinBox->text().toInt() * 1000);
 }
 
 void MainWin::BtnRadarCreateClicked() {
@@ -53,6 +113,15 @@ void MainWin::BtnRadarStopClicked() {
 void MainWin::RadarSendUdpPackageOnTime() {
 	QStringList idstr = ui->radarId->text().split("_");
 	int id = idstr[1].toInt();
+
+	QTime nTime = QTime::currentTime();
+	QString timeStr = QString("%1%2%3.%4")
+		.arg(QString("%1").arg(nTime.hour(), 2, 10, QLatin1Char('0')))
+		.arg(QString("%1").arg(nTime.minute(), 2, 10, QLatin1Char('0')))
+		.arg(QString("%1").arg(nTime.second(), 2, 10, QLatin1Char('0')))
+		.arg(QString("%1").arg(nTime.msec(), 3, 10, QLatin1Char('0')))
+		;
+
 	QString dataPacket = QString("UdPbC0\s:RA%1,n:%2*HH\$GETTM,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15,%16,%17*hh\r\n")
 		.arg(ui->radarId->text().remove("_"))
 		.arg(id)
@@ -69,7 +138,7 @@ void MainWin::RadarSendUdpPackageOnTime() {
 		.arg("")			//11，目标名称
 		.arg("L")		//12，航迹状态
 		.arg("")			//13，未用
-		.arg("")				//14，时间
+		.arg(timeStr)				//14，时间
 		.arg("A")			//15，目标数据捕获类型
 		;
 

@@ -528,14 +528,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_14">
          <item>
-          <widget class="QLineEdit" name="btnAisNew">
+          <widget class="QLineEdit" name="aisIpPort">
            <property name="text">
             <string>45009</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="ais">
+          <widget class="QPushButton" name="btnAisNew">
            <property name="text">
             <string>Create New ID</string>
            </property>
