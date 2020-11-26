@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>470</width>
-    <height>560</height>
+    <height>580</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>470</width>
-    <height>560</height>
+    <height>580</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>470</width>
-    <height>560</height>
+    <height>580</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
      <x>20</x>
      <y>10</y>
      <width>431</width>
-     <height>151</height>
+     <height>191</height>
     </rect>
    </property>
    <property name="title">
@@ -41,12 +41,12 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>20</y>
       <width>411</width>
-      <height>131</height>
+      <height>162</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_15">
+    <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
@@ -69,6 +69,27 @@
           <widget class="QLabel" name="label_4">
            <property name="text">
             <string>Latitude:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>Heading:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>Pitch angle:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_26">
+           <property name="text">
+            <string>Roll angle:</string>
            </property>
           </widget>
          </item>
@@ -97,8 +118,33 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QLineEdit" name="heading">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="pitchAngle">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="rollAngle">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
@@ -118,7 +164,28 @@
          <item>
           <widget class="QLabel" name="label_6">
            <property name="text">
-            <string>Direction:</string>
+            <string>Course:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Msg 1.sec:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_27">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_28">
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
@@ -147,68 +214,31 @@
            </property>
           </widget>
          </item>
+         <item>
+          <widget class="QSpinBox" name="spinBox">
+           <property name="minimum">
+            <number>1</number>
+           </property>
+           <property name="value">
+            <number>1</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnStart">
+           <property name="text">
+            <string>Start</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnStop">
+           <property name="text">
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
         </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Msg 1.sec:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="spinBox">
-         <property name="minimum">
-          <number>1</number>
-         </property>
-         <property name="value">
-          <number>1</number>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnStop">
-         <property name="text">
-          <string>Stop</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnStart">
-         <property name="text">
-          <string>Start</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </item>
@@ -219,7 +249,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>180</y>
+     <y>200</y>
      <width>431</width>
      <height>171</height>
     </rect>
@@ -283,7 +313,7 @@
          <item>
           <widget class="QLineEdit" name="radarSpeed">
            <property name="text">
-            <string>1000</string>
+            <string>1</string>
            </property>
           </widget>
          </item>
@@ -409,7 +439,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>360</y>
+     <y>370</y>
      <width>431</width>
      <height>191</height>
     </rect>
@@ -633,7 +663,6 @@
   <tabstop>direction</tabstop>
   <tabstop>spinBox</tabstop>
   <tabstop>btnStop</tabstop>
-  <tabstop>btnStart</tabstop>
  </tabstops>
  <resources/>
  <connections/>

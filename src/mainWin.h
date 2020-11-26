@@ -27,7 +27,8 @@ public:
 public slots:
     void BtnStartClicked();
     void BtnStopClicked();
-    void SendUdpPackageOnTime();
+	void SendUdpPackageOnTime();
+	void SendUdpInfoOneOnTime();
     void BtnSpinChange(int);
 
 	void BtnRadarStartClicked();
