@@ -21,6 +21,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 #打开全局rcc
 # set(CMAKE_AUTORCC ON)
+ADD_DEFINITIONS(-DUNICODE)
 
 message("Looking for Qt...")
 # Qt modules (https://doc.qt.io/qt-5/qtmodules.html) you're using in your application
