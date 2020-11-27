@@ -49,6 +49,9 @@ void MainWin::BtnAisStartClicked() {
 	ui->btnAisStart->setEnabled(false);
 	ui->btnAisStop->setEnabled(true);
 
+	aisLon = ui->aisLon->text().toDouble();
+	aisLat = ui->aisLat->text().toDouble();
+
 	aisUdpTimer.start(ui->aisSpinBox->text().toInt() * 1000);
 }
 
@@ -68,13 +71,22 @@ void MainWin::BtnAisStopClicked() {
 void MainWin::AisSendUdpPackageOnTime() {
 	QStringList idstr = ui->aisId->text().split("_");
 	int id = idstr[1].toInt();
+
+	QTime nTime = QTime::currentTime();
+	QString timeStr = QString("%1%2%3.%4")
+		.arg(QString("%1").arg(nTime.hour(), 2, 10, QLatin1Char('0')))
+		.arg(QString("%1").arg(nTime.minute(), 2, 10, QLatin1Char('0')))
+		.arg(QString("%1").arg(nTime.second(), 2, 10, QLatin1Char('0')))
+		.arg(QString("%1").arg(nTime.msec(), 3, 10, QLatin1Char('0')))
+		;
 	
-	QString dataPacket = QString("UdPAIS,%1,%2,%3,%4,%5,*hh\r\n")
-		.arg(ui->radarId->text().remove("_"))
+	QString dataPacket = QString("UdPAIS,%1,%2,%3,%4,%5,%6,*hh\r\n")
+		.arg(ui->aisId->text().remove("_"))
 		.arg(aisLon)
 		.arg(aisLat)
 		.arg(ui->aisSpeed->text().toInt() * 10)						
 		.arg(ui->aisDirection->text().toInt() * 10) 
+		.arg(timeStr)
 		;
 
 	udpTransceiver->SendDataNow(dataPacket.toUtf8().data(), ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
