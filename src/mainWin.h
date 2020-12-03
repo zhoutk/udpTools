@@ -43,6 +43,8 @@ public slots:
 	void AisSendUdpPackageOnTime();
 	void BtnAisSpinChange(int);
 
+    void CalcRadarTargetInfo();
+
 private:
     Ui::MainWin*ui;
     QTimer udpTimer;

@@ -1,6 +1,19 @@
+#include <QtMath>
 #include "mainWin.h"
 
 static void ParseDatagrams(QByteArray& d);
+
+double g_gpsPoxx = 0;
+double g_gpsPoxy = 0;
+double g_radarDist = 0;
+double g_radarBear = 0;
+double g_timeElapsed = 0;
+
+static void calc_deg_per_m(double latMid, double lonMid, double &deg_per_m_lat, double &deg_per_m_lon)
+{
+    deg_per_m_lat = 1.0 / (111132.954 - 559.822 * cos( 2 * latMid ) + 1.175 * cos( 4 * latMid));
+    deg_per_m_lon = 1.0 / (111132.954 * cos ( latMid ));
+}
 
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
@@ -27,6 +40,7 @@ MainWin::MainWin(QWidget *parent)
     connect(ui->btnRadarStop, SIGNAL(clicked()), this, SLOT(BtnRadarStopClicked()));
     connect(ui->radarSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnRadarSpinChange(int)));
     connect(&radarUdpTimer, SIGNAL(timeout()), this, SLOT(RadarSendUdpPackageOnTime()));
+    connect(&radarUdpTimer, SIGNAL(timeout()), this, SLOT(CalcRadarTargetInfo()));
     connect(ui->btnRadarNew, SIGNAL(clicked()), this, SLOT(BtnRadarCreateClicked()));
 
     aisLon = ui->aisLon->text().toDouble();
@@ -101,6 +115,33 @@ void MainWin::BtnAisSpinChange(int value) {
     aisUdpTimer.start(ui->aisSpinBox->text().toInt() * 1000);
 }
 
+void MainWin::CalcRadarTargetInfo()
+{
+    double course = ui->direction->text().toDouble();
+    double speed = ui->speed->text().toDouble();
+    double initDist = ui->radarSpeed->text().toDouble();
+    double initBear = ui->RadarDirection->text().toDouble();
+    double rdSpeed = ui->radarVelocity->text().toDouble();
+    double rdCourse = ui->radarCourse->text().toDouble();
+
+    // radar initial pos
+    double rdInitPosx = initDist * qSin(qDegreesToRadians(initBear)) * 1852.0;
+    double rdInitPosy = initDist * qCos(qDegreesToRadians(initBear)) * 1852.0;
+
+    double rdPosx = rdInitPosx + rdSpeed * qSin(qDegreesToRadians(rdCourse)) * 1852.0 / 3600.0 * g_timeElapsed;
+    double rdPosy = rdInitPosy + rdSpeed * qCos(qDegreesToRadians(rdCourse)) * 1852.0 / 3600.0 * g_timeElapsed;
+
+    g_gpsPoxx = speed * qSin(qDegreesToRadians(course)) * 1852.0 / 3600.0 * g_timeElapsed;
+    g_gpsPoxy = speed * qCos(qDegreesToRadians(course)) * 1852.0 / 3600.0 * g_timeElapsed;
+
+    g_radarDist = qSqrt((rdPosx - g_gpsPoxx) * (rdPosx - g_gpsPoxx) +
+                        (rdPosy - g_gpsPoxy) * (rdPosy - g_gpsPoxy));
+
+    g_radarBear = 90.0 - qRadiansToDegrees(qAtan2(rdPosy - g_gpsPoxy, rdPosx - g_gpsPoxx));
+
+    g_timeElapsed++;
+}
+
 void MainWin::BtnRadarCreateClicked() {
     QStringList idstr = ui->radarId->text().split("_");
     int id = idstr[1].toInt();
@@ -120,6 +161,7 @@ void MainWin::BtnRadarStopClicked() {
     ui->btnRadarStart->setEnabled(true);
 
     radarUdpTimer.stop();
+    g_timeElapsed = 0;
 }
 
 void MainWin::RadarSendUdpPackageOnTime() {
@@ -138,11 +180,11 @@ void MainWin::RadarSendUdpPackageOnTime() {
         .arg(ui->radarId->text().remove("_"))
         .arg(id)
         .arg(id)
-        .arg(ui->radarSpeed->text().toInt() * 1000)											//2������
-        .arg(ui->RadarDirection->text()) 										//3����λ
+        .arg(g_radarDist * 1000)											//2������
+        .arg(g_radarBear) 										//3����λ
         .arg("T")										//4�����ԣ�����
-        .arg(6)												//5���ٶ�
-        .arg(45)		//6������
+        .arg(ui->radarVelocity->text().toDouble())												//5���ٶ�
+        .arg(ui->radarCourse->text().toDouble())		//6������
         .arg("R")		//7�����ԣ����Ժ���ָʾ
         .arg("0.01")		//8��CPA
         .arg("0.02")	//9��TCPA
@@ -180,8 +222,10 @@ void MainWin::SendUdpPackageOnTime() {
 
     s << (int)(lon * 600000.0);
     s << (int)(lat * 600000.0);
-    lon += qSin(ui->direction->text().toDouble() * M_PI / 180) * speeDeta * ui->speed->text().toDouble();
-    lat += qCos(ui->direction->text().toDouble() * M_PI / 180) * speeDeta * ui->speed->text().toDouble();
+    double deg_per_m_lon, deg_per_m_lat;
+    calc_deg_per_m(lat, lon, deg_per_m_lat, deg_per_m_lon);
+    lon += qSin(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lon * ui->speed->text().toDouble();
+    lat += qCos(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lat * ui->speed->text().toDouble();
 
     const char height[] = { 0x00, 0x00, 0x00, 0x2e };
     s.writeRawData(height, 4);
