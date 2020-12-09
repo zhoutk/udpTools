@@ -118,7 +118,7 @@ void MainWin::BtnAisSpinChange(int value) {
 void MainWin::CalcRadarTargetInfo()
 {
     double course = ui->direction->text().toDouble();
-    double speed = ui->speed->text().toDouble();
+    double speed = ui->speedToGround->text().toDouble();
     double initDist = ui->radarSpeed->text().toDouble();
     double initBear = ui->RadarDirection->text().toDouble();
     double rdSpeed = ui->radarVelocity->text().toDouble();
@@ -164,7 +164,7 @@ void MainWin::BtnRadarStopClicked() {
     g_timeElapsed = 0;
 }
 
-void MainWin::RadarSendUdpPackageOnTime() {
+void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
     QStringList idstr = ui->radarId->text().split("_");
     int id = idstr[1].toInt();
 
@@ -205,7 +205,7 @@ void MainWin::BtnRadarSpinChange(int value) {
     radarUdpTimer.start(ui->radarSpinBox->text().toInt() * 1000);
 }
 
-void MainWin::SendUdpPackageOnTime() {
+void MainWin::SendUdpPackageOnTime() {                  //gps encode
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
 
@@ -224,11 +224,10 @@ void MainWin::SendUdpPackageOnTime() {
     s << (int)(lat * 600000.0);
     double deg_per_m_lon, deg_per_m_lat;
     calc_deg_per_m(lat, lon, deg_per_m_lat, deg_per_m_lon);
-    lon += qSin(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lon * ui->speed->text().toDouble();
-    lat += qCos(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lat * ui->speed->text().toDouble();
+    lon += qSin(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lon * ui->speedToGround->text().toDouble();
+    lat += qCos(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lat * ui->speedToGround->text().toDouble();
 
-    const char height[] = { 0x00, 0x00, 0x00, 0x2e };
-    s.writeRawData(height, 4);
+    s << (int)(ui->height->text().toInt());
 
     QTime nTime = QTime::currentTime();
 
@@ -239,20 +238,35 @@ void MainWin::SendUdpPackageOnTime() {
     const char speedState[] = { 0x00, 0x01 };
     s.writeRawData(speedState, 2);
 
-    const char speedToWater[] = { 0x00, 0x00, 0x00, 0x12 };
-    s.writeRawData(speedToWater, 4);
+    s << (int)(ui->speedToWater->text().toInt() * 10);
 
-    s << (int)(ui->speed->text().toInt() * 10);			//speed to ground
+    s << (int)(ui->speedToGround->text().toInt() * 10);			//speed to ground
 
     s << (int)(ui->direction->text().toInt() *10);		//drection to groud
 
-    const unsigned char lastGroup[] = { 0x00, 0x00, 0x00, 0x10, 0x00, 0x08, 0x00, 0x20, 0x00, 0x16, 0x01, 0x00, 0x00, 0x91, 0x00, 0x67, 0x00, 0x43, 0x00, 0x51 };
-    s.writeRawData((const char*)lastGroup, 20);
+	const char weatherState[] = { 0x00, 0x1F };
+	s.writeRawData(weatherState, 2);
+
+	s << (short)(ui->trueWindSpeed->text().toInt() * 10);
+	s << (short)(ui->trueWindDirection->text().toInt());
+
+    s << (short)(ui->relativeWindSpeed->text().toInt() * 10);
+	s << (short)(ui->relativeWindDirection->text().toInt());
+	
+    s << (short)(ui->temperature->text().toInt() * 10);
+	s << (short)(ui->humidity->text().toInt() * 10);
+
+	s << (short)(ui->pressure->text().toInt() * 10);
+	
+	const char depthState[] = { 0x00, 0x01 };
+	s.writeRawData(depthState, 2);
+
+	s << (short)(ui->depth->text().toInt() * 10);
 
     udpTransceiver->SendDataNow(data, ui->ipAddress->text(), ui->ipPort->text().toInt());
 }
 
-void MainWin::SendUdpInfoOneOnTime() {
+void MainWin::SendUdpInfoOneOnTime() {                      //gps 1 encode
     QByteArray data;
     QDataStream s(&data, QIODevice::WriteOnly);
 
