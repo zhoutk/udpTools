@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>787</width>
-    <height>541</height>
+    <width>591</width>
+    <height>361</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>591</width>
+    <height>361</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>591</width>
+    <height>361</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>UdpToos</string>
@@ -23,7 +35,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabGps">
     <attribute name="title">
@@ -749,271 +761,11 @@
     <attribute name="title">
      <string>Ais</string>
     </attribute>
-    <widget class="QLineEdit" name="aisROT">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>80</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_42">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>90</y>
-       <width>60</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>ROT:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_41">
-     <property name="geometry">
-      <rect>
-       <x>11</x>
-       <y>237</y>
-       <width>81</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>True Course:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisTrueCourse">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>230</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_17">
-     <property name="geometry">
-      <rect>
-       <x>22</x>
-       <y>12</y>
-       <width>18</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>IP:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_20">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>180</y>
-       <width>54</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Latitude:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_18">
-     <property name="geometry">
-      <rect>
-       <x>22</x>
-       <y>30</y>
-       <width>18</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>ID:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_19">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>150</y>
-       <width>60</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Longitude:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisIpAddress">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>12</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>224.3.4.9</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisId">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>38</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>AIS_0001</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisLon">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>144</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>61</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisLat">
-     <property name="geometry">
-      <rect>
-       <x>80</x>
-       <y>170</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>-32.5</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_21">
-     <property name="geometry">
-      <rect>
-       <x>231</x>
-       <y>12</y>
-       <width>30</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PORT:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_22">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>50</y>
-       <width>41</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>dddd</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_24">
-     <property name="geometry">
-      <rect>
-       <x>11</x>
-       <y>207</y>
-       <width>131</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Course To Ground:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_23">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>110</y>
-       <width>111</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Speed To Ground:</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="btnAisNew">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>60</y>
-       <width>86</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Create New ID</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisIpPort">
-     <property name="geometry">
-      <rect>
-       <x>299</x>
-       <y>12</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>45009</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisSpeed">
-     <property name="geometry">
-      <rect>
-       <x>110</x>
-       <y>110</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>1</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="aisDirection">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>200</y>
-       <width>133</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>117</x>
-       <y>301</y>
+       <x>150</x>
+       <y>290</y>
        <width>270</width>
        <height>25</height>
       </rect>
@@ -1049,6 +801,424 @@
          <string>Start</string>
         </property>
        </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>510</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QLabel" name="label_17">
+          <property name="text">
+           <string>IP:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_21">
+          <property name="text">
+           <string>PORT:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_18">
+          <property name="text">
+           <string>ID:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_42">
+          <property name="text">
+           <string>ROT:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_23">
+          <property name="text">
+           <string>Speed To Ground:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_19">
+          <property name="text">
+           <string>Longitude:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_20">
+          <property name="text">
+           <string>Latitude:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_24">
+          <property name="text">
+           <string>Course To Ground:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_41">
+          <property name="text">
+           <string>True Course:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_10">
+        <item>
+         <widget class="QLineEdit" name="aisIpAddress">
+          <property name="text">
+           <string>224.3.4.9</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisIpPort">
+          <property name="text">
+           <string>45009</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisId">
+          <property name="text">
+           <string>AIS_0001</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnAisNew">
+          <property name="text">
+           <string>Create New ID</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisROT">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisSpeed">
+          <property name="text">
+           <string>1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisLon">
+          <property name="text">
+           <string>61</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisLat">
+          <property name="text">
+           <string>-32.5</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisDirection">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisTrueCourse">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <widget class="QLabel" name="label_43">
+          <property name="text">
+           <string>IMO:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_44">
+          <property name="text">
+           <string>Ship Rank:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_46">
+          <property name="text">
+           <string>Target Length:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_47">
+          <property name="text">
+           <string>Target Width:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_45">
+          <property name="text">
+           <string>Target Draft:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_48">
+          <property name="text">
+           <string>Target Type:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_49">
+          <property name="text">
+           <string>Target destination:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_50">
+          <property name="text">
+           <string>Arrive Time:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_52">
+          <property name="text">
+           <string>Call Sign:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_51">
+          <property name="text">
+           <string>Ship Name:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QLineEdit" name="aisIMO">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="aisShipRank">
+          <item>
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisTargetLength">
+          <property name="text">
+           <string>300</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisTargetWidth">
+          <property name="text">
+           <string>100</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisTargetDraft">
+          <property name="text">
+           <string>50</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="aisTargetType">
+          <item>
+           <property name="text">
+            <string>2X</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>30</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>31</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>32</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>33</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>34</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>35</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>36</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>37</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4X</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>50</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>51</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>52</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>53</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>54</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>55</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>58</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>59</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>6X</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>7X</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>8X</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>9X</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisTargetDestination">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateTimeEdit" name="aisArriveTime"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisCallSign">
+          <property name="text">
+           <string>100</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="aisShipName">
+          <property name="text">
+           <string>50</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

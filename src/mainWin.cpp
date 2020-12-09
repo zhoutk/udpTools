@@ -27,7 +27,7 @@ MainWin::MainWin(QWidget *parent)
     ui->btnStop->setEnabled(false);
     ui->btnRadarStop->setEnabled(false);
     ui->btnAisStop->setEnabled(false);
-
+    ui->aisArriveTime->setDateTime(QDateTime::currentDateTime());
     lon = ui->Lon->text().toDouble();
     lat = ui->Lat->text().toDouble();
     connect(ui->btnStart, SIGNAL(clicked()), this, SLOT(BtnStartClicked()));
@@ -48,7 +48,8 @@ MainWin::MainWin(QWidget *parent)
     connect(ui->btnAisStart, SIGNAL(clicked()), this, SLOT(BtnAisStartClicked()));
     connect(ui->btnAisStop, SIGNAL(clicked()), this, SLOT(BtnAisStopClicked()));
     connect(ui->aisSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnAisSpinChange(int)));
-    connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpDynamicPackageOnTime()));
+	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpDynamicPackageOnTime()));
+	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpStaticPackageOnTime()));
     connect(ui->btnAisNew, SIGNAL(clicked()), this, SLOT(BtnAisCreateClicked()));
 }
 
@@ -76,18 +77,55 @@ void MainWin::BtnAisStopClicked() {
     aisUdpTimer.stop();
 }
 
+void MainWin::AisSendUdpStaticPackageOnTime() {
+	QStringList idstr = ui->aisId->text().split("_");
+	int id = idstr[1].toInt();
+
+	QByteArray data;
+	QDataStream s(&data, QIODevice::WriteOnly);
+
+	const unsigned char head[] = { 0x90, 0x51 };
+	s.writeRawData((const char*)head, 2);
+	const char len[] = { 0x00, 0x5E };
+	s.writeRawData(len, 2);
+	const unsigned char sender[] = { 0x00, 0x00, 0x90, 0x03 };
+	s.writeRawData((const char*)sender, 4);
+	const unsigned char recver[] = { 0xFF, 0xFF, 0xFC, 0x01 };
+	s.writeRawData((const char*)recver, 4);
+
+	// Timestamp
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+	int timeInMs = (ltm->tm_hour * 60 * 60 + ltm->tm_min * 60 + ltm->tm_sec) * 1000;
+	s << timeInMs;
+
+	s << (int)id;
+
+	// State 1
+	s << (short)(0x0000);
+	// State 2
+	s << (short)(0x0000);
+
+	s << (short)(ui->aisROT->text().toDouble() * 100);
+	s << (short)(ui->aisSpeed->text().toInt() * 10);
+	s << (int)0;            //memo
+	// longitude
+	s << (int)(aisLon * 10000 * 60);
+	// latitude
+	s << (int)(aisLat * 10000 * 60);
+	s << (short)(ui->aisDirection->text().toDouble() * 10);
+	s << (short)(ui->aisTrueCourse->text().toInt());
+
+	udpTransceiver->SendDataNow(data, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
+
+	aisLon += qSin(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
+	aisLat += qCos(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
+}
+
 void MainWin::AisSendUdpDynamicPackageOnTime() {
     QStringList idstr = ui->aisId->text().split("_");
 	int id = idstr[1].toInt();
 
-	QTime nTime = QTime::currentTime();
-	QString timeStr = QString("%1%2%3.%4")
-		.arg(QString("%1").arg(nTime.hour(), 2, 10, QLatin1Char('0')))
-		.arg(QString("%1").arg(nTime.minute(), 2, 10, QLatin1Char('0')))
-		.arg(QString("%1").arg(nTime.second(), 2, 10, QLatin1Char('0')))
-		.arg(QString("%1").arg(nTime.msec(), 3, 10, QLatin1Char('0')))
-		;
-	
 	QByteArray data;
 	QDataStream s(&data, QIODevice::WriteOnly);
 

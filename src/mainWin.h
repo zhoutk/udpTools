@@ -41,6 +41,7 @@ public slots:
 	void BtnAisStopClicked();
 	void BtnAisCreateClicked();
 	void AisSendUdpDynamicPackageOnTime();
+	void AisSendUdpStaticPackageOnTime();
 	void BtnAisSpinChange(int);
 
     void CalcRadarTargetInfo();
