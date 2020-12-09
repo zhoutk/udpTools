@@ -100,21 +100,44 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 	s << timeInMs;
 
 	s << (int)id;
+	s << (int)(ui->aisIMO->text().toInt());
+	s << (short)(ui->aisShipRank->currentText().toInt());
+    s << (short)1;          // location sensor
+	s << (short)(ui->aisTargetLength->text().toInt());
+	s << (short)(ui->aisTargetWidth->text().toInt());
+	s << (short)(ui->aisTargetDraft->text().toInt() * 10);
 
-	// State 1
-	s << (short)(0x0000);
-	// State 2
-	s << (short)(0x0000);
+	char shipType[2];
+	memset(shipType, 0, 2);
+	strncpy(shipType, ui->aisTargetType->currentText().toStdString().c_str(), 2);
+	s.writeRawData(shipType, 2);
 
-	s << (short)(ui->aisROT->text().toDouble() * 100);
-	s << (short)(ui->aisSpeed->text().toInt() * 10);
-	s << (int)0;            //memo
-	// longitude
-	s << (int)(aisLon * 10000 * 60);
-	// latitude
-	s << (int)(aisLat * 10000 * 60);
-	s << (short)(ui->aisDirection->text().toDouble() * 10);
-	s << (short)(ui->aisTrueCourse->text().toInt());
+	// destination
+	char destination[21];
+	memset(destination, 0, 21);
+	strncpy(destination, ui->aisTargetDestination->text().toStdString().c_str(), 21);
+	s.writeRawData(destination, 21);
+
+	QDate nDate = QDate::currentDate();
+	QTime nTime = QTime::currentTime();
+	int ETA = 0;
+	ETA = nDate.month() << 16;
+	ETA |= nDate.day() << 11;
+	ETA |= nTime.hour() << 6;
+	ETA |= nTime.minute();
+	s << ETA;
+
+	// Call sign
+	char callsign[12];
+	memset(callsign, 0, 12);
+	strncpy(callsign, ui->aisCallSign->text().toStdString().c_str(), 12);
+	s.writeRawData(callsign, 12);
+
+	// ship name
+	char shipname[21];
+	memset(shipname, 0, 21);
+	strncpy(shipname, ui->aisShipName->text().toStdString().c_str(), 21);
+	s.writeRawData(shipname, 21);
 
 	udpTransceiver->SendDataNow(data, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
 

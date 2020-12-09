@@ -1076,7 +1076,7 @@
         <item>
          <widget class="QLineEdit" name="aisTargetDraft">
           <property name="text">
-           <string>50</string>
+           <string>30</string>
           </property>
          </widget>
         </item>
@@ -1207,14 +1207,14 @@
         <item>
          <widget class="QLineEdit" name="aisCallSign">
           <property name="text">
-           <string>100</string>
+           <string/>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="aisShipName">
           <property name="text">
-           <string>50</string>
+           <string/>
           </property>
          </widget>
         </item>
