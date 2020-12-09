@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabGps">
     <attribute name="title">
@@ -385,76 +385,7 @@
     <attribute name="title">
      <string>Radar</string>
     </attribute>
-    <widget class="QWidget" name="">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>280</y>
-       <width>362</width>
-       <height>25</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>Msg 1.sec:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QSpinBox" name="radarSpinBox">
-        <property name="minimum">
-         <number>1</number>
-        </property>
-        <property name="value">
-         <number>1</number>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnRadarStop">
-        <property name="text">
-         <string>Stop</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnRadarStart">
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -770,213 +701,354 @@
       </item>
      </layout>
     </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>290</y>
+       <width>270</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>Msg 1.sec:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="radarSpinBox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRadarStop">
+        <property name="text">
+         <string>Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRadarStart">
+        <property name="text">
+         <string>Start</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabAis">
     <attribute name="title">
      <string>Ais</string>
     </attribute>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QLineEdit" name="aisROT">
      <property name="geometry">
       <rect>
-       <x>70</x>
-       <y>110</y>
-       <width>416</width>
-       <height>171</height>
+       <x>90</x>
+       <y>80</y>
+       <width>133</width>
+       <height>20</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_10">
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ROT:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>237</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>True Course:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisTrueCourse">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>230</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>22</x>
+       <y>12</y>
+       <width>18</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>IP:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>180</y>
+       <width>54</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Latitude:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>22</x>
+       <y>30</y>
+       <width>18</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>60</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Longitude:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisIpAddress">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>12</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>224.3.4.9</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisId">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>38</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>AIS_0001</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisLon">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>144</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>61</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisLat">
+     <property name="geometry">
+      <rect>
+       <x>80</x>
+       <y>170</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>-32.5</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>231</x>
+       <y>12</y>
+       <width>30</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PORT:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>50</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>dddd</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>207</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Course To Ground:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>110</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Speed To Ground:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnAisNew">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>60</y>
+       <width>86</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Create New ID</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisIpPort">
+     <property name="geometry">
+      <rect>
+       <x>299</x>
+       <y>12</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>45009</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisSpeed">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>110</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>1</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="aisDirection">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>200</y>
+       <width>133</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>117</x>
+       <y>301</y>
+       <width>270</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_11">
-          <item>
-           <widget class="QLabel" name="label_17">
-            <property name="text">
-             <string>IP:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_18">
-            <property name="text">
-             <string>ID:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>Longitude:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>Latitude:</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QLineEdit" name="aisIpAddress">
-            <property name="text">
-             <string>224.3.4.9</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="aisId">
-            <property name="text">
-             <string>AIS_0001</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="aisLon">
-            <property name="text">
-             <string>61</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="aisLat">
-            <property name="text">
-             <string>-32.5</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <widget class="QLabel" name="label_21">
-            <property name="text">
-             <string>PORT:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_22">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_23">
-            <property name="text">
-             <string>Speed:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_24">
-            <property name="text">
-             <string>Direction:</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_14">
-          <item>
-           <widget class="QLineEdit" name="aisIpPort">
-            <property name="text">
-             <string>45009</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnAisNew">
-            <property name="text">
-             <string>Create New ID</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="aisSpeed">
-            <property name="text">
-             <string>1</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="aisDirection">
-            <property name="text">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
+       <widget class="QLabel" name="label_25">
+        <property name="text">
+         <string>Msg 1.sec:</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <item>
-         <spacer name="horizontalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_25">
-          <property name="text">
-           <string>Msg 1.sec:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="aisSpinBox">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnAisStop">
-          <property name="text">
-           <string>Stop</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnAisStart">
-          <property name="text">
-           <string>Start</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+       <widget class="QSpinBox" name="aisSpinBox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnAisStop">
+        <property name="text">
+         <string>Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnAisStart">
+        <property name="text">
+         <string>Start</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -1028,6 +1100,16 @@
   <tabstop>radarSpinBox</tabstop>
   <tabstop>radarId</tabstop>
   <tabstop>radarSpeed</tabstop>
+  <tabstop>radarBatchNumber</tabstop>
+  <tabstop>radarBearingIndication</tabstop>
+  <tabstop>btnRadarNew</tabstop>
+  <tabstop>radarCourseIndication</tabstop>
+  <tabstop>radarCPA</tabstop>
+  <tabstop>radarTCPA</tabstop>
+  <tabstop>radarUnit</tabstop>
+  <tabstop>radarName</tabstop>
+  <tabstop>radarTrackState</tabstop>
+  <tabstop>radarCaptureType</tabstop>
  </tabstops>
  <resources/>
  <connections/>

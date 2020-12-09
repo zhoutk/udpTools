@@ -48,7 +48,7 @@ MainWin::MainWin(QWidget *parent)
     connect(ui->btnAisStart, SIGNAL(clicked()), this, SLOT(BtnAisStartClicked()));
     connect(ui->btnAisStop, SIGNAL(clicked()), this, SLOT(BtnAisStopClicked()));
     connect(ui->aisSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnAisSpinChange(int)));
-    connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpPackageOnTime()));
+    connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpDynamicPackageOnTime()));
     connect(ui->btnAisNew, SIGNAL(clicked()), this, SLOT(BtnAisCreateClicked()));
 }
 
@@ -76,13 +76,7 @@ void MainWin::BtnAisStopClicked() {
     aisUdpTimer.stop();
 }
 
-
-//s << (int)(lon * 600000.0);
-//s << (int)(lat * 600000.0);
-
-
-
-void MainWin::AisSendUdpPackageOnTime() {
+void MainWin::AisSendUdpDynamicPackageOnTime() {
     QStringList idstr = ui->aisId->text().split("_");
 	int id = idstr[1].toInt();
 
@@ -94,17 +88,42 @@ void MainWin::AisSendUdpPackageOnTime() {
 		.arg(QString("%1").arg(nTime.msec(), 3, 10, QLatin1Char('0')))
 		;
 	
-	QString dataPacket = QString("UdPAIS,%1,%2,%3,%4,%5,%6,*hh\r\n")
-		.arg(ui->aisId->text().remove("_"))
-		.arg(aisLon)
-		.arg(aisLat)
-		.arg(ui->aisSpeed->text().toInt() * 10)						
-		.arg(ui->aisDirection->text().toInt() * 10) 
-		.arg(timeStr)
-		;
+	QByteArray data;
+	QDataStream s(&data, QIODevice::WriteOnly);
 
-    QByteArray ba(dataPacket.toStdString().c_str(), dataPacket.size());
-    udpTransceiver->SendDataNow(ba, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
+	const unsigned char head[] = { 0x90, 0x50 };
+	s.writeRawData((const char*)head, 2);
+	const char len[] = { 0x00, 0x2C };
+	s.writeRawData(len, 2);
+	const unsigned char sender[] = { 0x00, 0x00, 0x90, 0x03 };
+	s.writeRawData((const char*)sender, 4);
+	const unsigned char recver[] = { 0xFF, 0xFF, 0xFC, 0x01 };
+	s.writeRawData((const char*)recver, 4);
+
+	// Timestamp
+	time_t now = time(0);
+	tm* ltm = localtime(&now);
+	int timeInMs = (ltm->tm_hour * 60 * 60 + ltm->tm_min * 60 + ltm->tm_sec) * 1000;
+	s << timeInMs;
+
+    s << (int)id;
+
+	// State 1
+	s << (short)(0x0000);
+	// State 2
+	s << (short)(0x0000);
+
+    s << (short)(ui->aisROT->text().toDouble() * 100);
+    s << (short)(ui->aisSpeed->text().toInt() * 10);
+    s << (int)0;            //memo
+	// longitude
+	s << (int)(aisLon * 10000 * 60);
+	// latitude
+	s << (int)(aisLat * 10000 * 60);
+	s << (short)(ui->aisDirection->text().toDouble() * 10);
+	s << (short)(ui->aisTrueCourse->text().toInt());
+
+	udpTransceiver->SendDataNow(data, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
 
     aisLon += qSin(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
     aisLat += qCos(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
