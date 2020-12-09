@@ -179,21 +179,21 @@ void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
     QString dataPacket = QString("UdPbC0\s:RA%1,n:%2*HH\$GETTM,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15,%16,%17*hh\r\n")
         .arg(ui->radarId->text().remove("_"))
         .arg(id)
-        .arg(id)
-        .arg(g_radarDist * 1000)											//2������
-        .arg(g_radarBear) 										//3����λ
-        .arg("T")										//4�����ԣ�����
-        .arg(ui->radarVelocity->text().toDouble())												//5���ٶ�
-        .arg(ui->radarCourse->text().toDouble())		//6������
-        .arg("R")		//7�����ԣ����Ժ���ָʾ
-        .arg("0.01")		//8��CPA
-        .arg("0.02")	//9��TCPA
-        .arg("N")		//10��Ŀ���ٶȾ��뵥λ
-        .arg("")			//11��Ŀ������
-        .arg("L")		//12������״̬
-        .arg("")			//13��δ��
-        .arg(timeStr)				//14��ʱ��
-        .arg("A")			//15��Ŀ�����ݲ�������
+        .arg(ui->radarBatchNumber->text().toInt())                                //1 批号
+        .arg(g_radarDist * 1000)											//2 距离
+        .arg(g_radarBear) 										//3 方位
+        .arg(ui->radarBearingIndication->currentText())										//4 方位指示
+        .arg(ui->radarVelocity->text().toDouble())												//5 目标速度
+        .arg(ui->radarCourse->text().toDouble())		//6 目标航向
+        .arg(ui->radarCourseIndication->currentText())		//7 航向指示
+        .arg(ui->radarCPA->text().toDouble())		//8 CPA
+        .arg(ui->radarTCPA->text().toDouble())	//9 TCPA
+        .arg(ui->radarUnit->currentText())		//10 单位
+        .arg(ui->radarName->text())			//11 名称
+        .arg(ui->radarTrackState->currentText())		//12 航迹状态
+        .arg("")			//13 未用
+        .arg(timeStr)				//14 UTC时间
+        .arg(ui->radarCaptureType->currentText())			//15 捕获类型
         ;
 
     QByteArray ba(dataPacket.toStdString().c_str(), dataPacket.size());

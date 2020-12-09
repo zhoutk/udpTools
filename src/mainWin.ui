@@ -23,13 +23,13 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tabGps">
     <attribute name="title">
      <string>Gps</string>
     </attribute>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -337,7 +337,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>150</x>
@@ -385,206 +385,386 @@
     <attribute name="title">
      <string>Radar</string>
     </attribute>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>90</y>
-       <width>605</width>
-       <height>141</height>
+       <x>90</x>
+       <y>280</y>
+       <width>362</width>
+       <height>25</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_9">
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>Msg 1.sec:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="radarSpinBox">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRadarStop">
+        <property name="text">
+         <string>Stop</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRadarStart">
+        <property name="text">
+         <string>Start</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>522</width>
+       <height>261</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>IP:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_15">
-            <property name="text">
-             <string>ID:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>Init Distance:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_29">
-            <property name="text">
-             <string>speed</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_8">
+          <property name="text">
+           <string>IP:</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QLineEdit" name="radarIpAddress">
-            <property name="text">
-             <string>224.3.4.6</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="radarId">
-            <property name="text">
-             <string>RA_0001</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="radarSpeed">
-            <property name="text">
-             <string>1</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="radarVelocity">
-            <property name="text">
-             <string>1</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_15">
+          <property name="text">
+           <string>ID:</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_7">
-          <item>
-           <widget class="QLabel" name="label_11">
-            <property name="text">
-             <string>PORT:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="label_30">
-            <property name="text">
-             <string>Init bearing:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLabel" name="course">
-            <property name="text">
-             <string>course:</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_40">
+          <property name="text">
+           <string>Batch number:</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QLineEdit" name="radarIpPort">
-            <property name="text">
-             <string>45006</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btnRadarNew">
-            <property name="text">
-             <string>Create New ID</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="RadarDirection">
-            <property name="text">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="radarCourse">
-            <property name="text">
-             <string>0</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QLabel" name="label_12">
+          <property name="text">
+           <string>Init Distance:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_30">
+          <property name="text">
+           <string>Init bearing:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_2">
+          <property name="text">
+           <string>bearing indication:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_29">
+          <property name="text">
+           <string>speed</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course">
+          <property name="text">
+           <string>course:</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
         <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_14">
+         <widget class="QLineEdit" name="radarIpAddress">
           <property name="text">
-           <string>Msg 1.sec:</string>
+           <string>224.3.4.6</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="radarSpinBox">
-          <property name="minimum">
-           <number>1</number>
-          </property>
-          <property name="value">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnRadarStop">
+         <widget class="QLineEdit" name="radarId">
           <property name="text">
-           <string>Stop</string>
+           <string>RA_0001</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btnRadarStart">
+         <widget class="QLineEdit" name="radarBatchNumber">
           <property name="text">
-           <string>Start</string>
+           <string>1</string>
           </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+         <widget class="QLineEdit" name="radarSpeed">
+          <property name="text">
+           <string>1</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="RadarDirection">
+          <property name="text">
+           <string>0</string>
           </property>
-         </spacer>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="radarBearingIndication">
+          <item>
+           <property name="text">
+            <string>T</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>R</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="radarVelocity">
+          <property name="text">
+           <string>1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="radarCourse">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_11">
+          <property name="text">
+           <string>PORT:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_16">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_3">
+          <property name="text">
+           <string>Course indication:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_4">
+          <property name="text">
+           <string>CPA:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_5">
+          <property name="text">
+           <string>TCPA:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_6">
+          <property name="text">
+           <string>Unit:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_7">
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_8">
+          <property name="text">
+           <string>Track state:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="course_9">
+          <property name="text">
+           <string>Capture type:</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QLineEdit" name="radarIpPort">
+          <property name="text">
+           <string>45006</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnRadarNew">
+          <property name="text">
+           <string>Create New ID</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="radarCourseIndication">
+          <item>
+           <property name="text">
+            <string>T</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>R</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="radarCPA">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="radarTCPA">
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="radarUnit">
+          <item>
+           <property name="text">
+            <string>K</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>N</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>S</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="radarName">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="radarTrackState">
+          <item>
+           <property name="text">
+            <string>L</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Q</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>T</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="radarCaptureType">
+          <item>
+           <property name="text">
+            <string>A</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>M</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>R</string>
+           </property>
+          </item>
+         </widget>
         </item>
        </layout>
       </item>
@@ -844,55 +1024,10 @@
   <tabstop>radarVelocity</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>radarIpPort</tabstop>
-  <tabstop>btnRadarNew</tabstop>
   <tabstop>radarIpAddress</tabstop>
   <tabstop>radarSpinBox</tabstop>
   <tabstop>radarId</tabstop>
   <tabstop>radarSpeed</tabstop>
-  <tabstop>Lat_3</tabstop>
-  <tabstop>speedToWater_2</tabstop>
-  <tabstop>trueWindDirection_2</tabstop>
-  <tabstop>trueWindSpeed_2</tabstop>
-  <tabstop>relativeWindSpeed_2</tabstop>
-  <tabstop>relativeWindDirection_2</tabstop>
-  <tabstop>humidity_3</tabstop>
-  <tabstop>temperature_3</tabstop>
-  <tabstop>temperature_4</tabstop>
-  <tabstop>humidity_4</tabstop>
-  <tabstop>ipAddress_2</tabstop>
-  <tabstop>Lat_4</tabstop>
-  <tabstop>Lon_2</tabstop>
-  <tabstop>rollAngle_2</tabstop>
-  <tabstop>heading_2</tabstop>
-  <tabstop>pitchAngle_2</tabstop>
-  <tabstop>speedToGround_2</tabstop>
-  <tabstop>ipPort_2</tabstop>
-  <tabstop>direction_2</tabstop>
-  <tabstop>spinBox_2</tabstop>
-  <tabstop>btnStart_2</tabstop>
-  <tabstop>btnStop_2</tabstop>
-  <tabstop>radarIpAddress_2</tabstop>
-  <tabstop>radarId_2</tabstop>
-  <tabstop>radarSpeed_2</tabstop>
-  <tabstop>radarVelocity_2</tabstop>
-  <tabstop>radarIpPort_2</tabstop>
-  <tabstop>btnRadarNew_2</tabstop>
-  <tabstop>RadarDirection_2</tabstop>
-  <tabstop>radarCourse_2</tabstop>
-  <tabstop>radarSpinBox_2</tabstop>
-  <tabstop>btnRadarStop_2</tabstop>
-  <tabstop>btnRadarStart_2</tabstop>
-  <tabstop>aisIpAddress_2</tabstop>
-  <tabstop>aisId_2</tabstop>
-  <tabstop>aisLon_2</tabstop>
-  <tabstop>aisLat_2</tabstop>
-  <tabstop>aisIpPort_2</tabstop>
-  <tabstop>btnAisNew_2</tabstop>
-  <tabstop>aisSpeed_2</tabstop>
-  <tabstop>aisDirection_2</tabstop>
-  <tabstop>aisSpinBox_2</tabstop>
-  <tabstop>btnAisStop_2</tabstop>
-  <tabstop>btnAisStart_2</tabstop>
  </tabstops>
  <resources/>
  <connections/>
