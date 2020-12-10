@@ -95,7 +95,7 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 
 	// Timestamp
 	QTime ltm = QTime::currentTime();
-	int timeInMs = (ltm.hour() * 60 * 60 + ltm.minute() + ltm.second()) * 1000;
+	int timeInMs = (ltm.hour() * 60 * 60 + ltm.minute() * 60 + ltm.second()) * 1000;
 	s << timeInMs;
 
 	s << (int)id;
@@ -117,8 +117,8 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 	strncpy(destination, ui->aisTargetDestination->text().toStdString().c_str(), 21);
 	s.writeRawData(destination, 21);
 
-	QDate nDate = QDate::currentDate();
-	QTime nTime = QTime::currentTime();
+	QDate nDate = ui->aisArriveTime->date();
+	QTime nTime = ui->aisArriveTime->time();
 	int ETA = 0;
 	ETA = nDate.month() << 16;
 	ETA |= nDate.day() << 11;
@@ -162,7 +162,7 @@ void MainWin::AisSendUdpDynamicPackageOnTime() {
 
 	// Timestamp
 	QTime ltm = QTime::currentTime();
-	int timeInMs = (ltm.hour() * 60 * 60 + ltm.minute() + ltm.second()) * 1000;
+	int timeInMs = (ltm.hour() * 60 * 60 + ltm.minute() * 60 + ltm.second()) * 1000 + ltm.msec();
 	s << timeInMs;
 
     s << (int)id;
