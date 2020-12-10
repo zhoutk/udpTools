@@ -94,9 +94,8 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 	s.writeRawData((const char*)recver, 4);
 
 	// Timestamp
-	time_t now = time(0);
-	tm* ltm = localtime(&now);
-	int timeInMs = (ltm->tm_hour * 60 * 60 + ltm->tm_min * 60 + ltm->tm_sec) * 1000;
+	QTime ltm = QTime::currentTime();
+	int timeInMs = (ltm.hour() * 60 * 60 + ltm.minute() + ltm.second()) * 1000;
 	s << timeInMs;
 
 	s << (int)id;
@@ -162,9 +161,8 @@ void MainWin::AisSendUdpDynamicPackageOnTime() {
 	s.writeRawData((const char*)recver, 4);
 
 	// Timestamp
-	time_t now = time(0);
-	tm* ltm = localtime(&now);
-	int timeInMs = (ltm->tm_hour * 60 * 60 + ltm->tm_min * 60 + ltm->tm_sec) * 1000;
+	QTime ltm = QTime::currentTime();
+	int timeInMs = (ltm.hour() * 60 * 60 + ltm.minute() + ltm.second()) * 1000;
 	s << timeInMs;
 
     s << (int)id;
