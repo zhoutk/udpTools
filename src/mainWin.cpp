@@ -99,11 +99,11 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 	s << timeInMs;
 
 	s << (int)id;
-	s << (int)(ui->aisIMO->text().toInt());
-	s << (short)(ui->aisShipRank->currentText().toInt());
+	s << (int)(ui->aisIMO->text().toDouble());
+	s << (short)(ui->aisShipRank->currentText().toDouble());
     s << (short)1;          // location sensor
-	s << (short)(ui->aisTargetLength->text().toInt());
-	s << (short)(ui->aisTargetWidth->text().toInt());
+	s << (short)(ui->aisTargetLength->text().toDouble());
+	s << (short)(ui->aisTargetWidth->text().toDouble());
 	s << (short)(ui->aisTargetDraft->text().toDouble() * 10);
 
 	char shipType[2];
@@ -180,7 +180,7 @@ void MainWin::AisSendUdpDynamicPackageOnTime() {
 	// latitude
 	s << (int)(aisLat * 10000 * 60);
 	s << (short)(ui->aisDirection->text().toDouble() * 10);
-	s << (short)(ui->aisTrueCourse->text().toInt());
+	s << (short)(ui->aisTrueCourse->text().toDouble());
 
 	udpTransceiver->SendDataNow(data, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
 
@@ -258,7 +258,7 @@ void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
         .arg(ui->radarId->text().remove("_"))
         .arg(id)
         .arg(ui->radarBatchNumber->text().toInt())                                //1 批号
-        .arg(g_radarDist * 1000)											//2 距离
+        .arg(g_radarDist)											//2 距离
         .arg(g_radarBear) 										//3 方位
         .arg(ui->radarBearingIndication->currentText())										//4 方位指示
         .arg(ui->radarVelocity->text().toDouble())												//5 目标速度
@@ -326,10 +326,10 @@ void MainWin::SendUdpPackageOnTime() {                  //gps encode
 	s.writeRawData(weatherState, 2);
 
 	s << (short)(ui->trueWindSpeed->text().toDouble() * 10);
-	s << (short)(ui->trueWindDirection->text().toInt());
+	s << (short)(ui->trueWindDirection->text().toDouble());
 
     s << (short)(ui->relativeWindSpeed->text().toDouble() * 10);
-	s << (short)(ui->relativeWindDirection->text().toInt());
+	s << (short)(ui->relativeWindDirection->text().toDouble());
 	
     s << (short)(ui->temperature->text().toDouble() * 10);
 	s << (short)(ui->humidity->text().toDouble() * 10);
