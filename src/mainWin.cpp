@@ -54,10 +54,9 @@ MainWin::MainWin(QWidget *parent)
 }
 
 void MainWin::BtnAisCreateClicked() {
-    QStringList idstr = ui->aisId->text().split("_");
-    int id = idstr[1].toInt();
-    QString str = QString("%1").arg(id + 1, 4, 10, QLatin1Char('0'));
-    ui->aisId->setText(QString("AIS_").append(str));
+    long long id = ui->aisId->text().toLongLong();
+    QString str = QString("%1").arg(id + 1, 7, 10, QLatin1Char('0'));
+    ui->aisId->setText(str);
 }
 
 void MainWin::BtnAisStartClicked() {
@@ -78,8 +77,7 @@ void MainWin::BtnAisStopClicked() {
 }
 
 void MainWin::AisSendUdpStaticPackageOnTime() {
-	QStringList idstr = ui->aisId->text().split("_");
-	int id = idstr[1].toInt();
+    long long id = ui->aisId->text().toLongLong();
 
 	QByteArray data;
 	QDataStream s(&data, QIODevice::WriteOnly);
@@ -145,8 +143,7 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 }
 
 void MainWin::AisSendUdpDynamicPackageOnTime() {
-    QStringList idstr = ui->aisId->text().split("_");
-	int id = idstr[1].toInt();
+	long long id = ui->aisId->text().toLongLong();
 
 	QByteArray data;
 	QDataStream s(&data, QIODevice::WriteOnly);
@@ -221,10 +218,9 @@ void MainWin::CalcRadarTargetInfo()
 }
 
 void MainWin::BtnRadarCreateClicked() {
-    QStringList idstr = ui->radarId->text().split("_");
-    int id = idstr[1].toInt();
+    int id = ui->radarId->text().toInt();
     QString str = QString("%1").arg(id + 1, 4, 10, QLatin1Char('0'));
-    ui->radarId->setText(QString("RA_").append(str));
+    ui->radarId->setText(str);
 }
 
 void MainWin::BtnRadarStartClicked() {
@@ -243,8 +239,7 @@ void MainWin::BtnRadarStopClicked() {
 }
 
 void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
-    QStringList idstr = ui->radarId->text().split("_");
-    int id = idstr[1].toInt();
+    int id = ui->radarId->text().toInt();
 
     QTime nTime = QTime::currentTime();
     QString timeStr = QString("%1%2%3.%4")

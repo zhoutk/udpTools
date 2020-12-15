@@ -479,7 +479,7 @@
         <item>
          <widget class="QLineEdit" name="radarId">
           <property name="text">
-           <string>RA_0001</string>
+           <string>2156</string>
           </property>
          </widget>
         </item>
@@ -907,7 +907,7 @@
         <item>
          <widget class="QLineEdit" name="aisId">
           <property name="text">
-           <string>AIS_0001</string>
+           <string>312116825</string>
           </property>
          </widget>
         </item>
