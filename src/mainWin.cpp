@@ -104,7 +104,7 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
     s << (short)1;          // location sensor
 	s << (short)(ui->aisTargetLength->text().toInt());
 	s << (short)(ui->aisTargetWidth->text().toInt());
-	s << (short)(ui->aisTargetDraft->text().toInt() * 10);
+	s << (short)(ui->aisTargetDraft->text().toDouble() * 10);
 
 	char shipType[2];
 	memset(shipType, 0, 2);
@@ -173,7 +173,7 @@ void MainWin::AisSendUdpDynamicPackageOnTime() {
 	s << (short)(0x0000);
 
     s << (short)(ui->aisROT->text().toDouble() * 100);
-    s << (short)(ui->aisSpeed->text().toInt() * 10);
+    s << (short)(ui->aisSpeed->text().toDouble() * 10);
     s << (int)0;            //memo
 	// longitude
 	s << (int)(aisLon * 10000 * 60);
@@ -316,30 +316,30 @@ void MainWin::SendUdpPackageOnTime() {                  //gps encode
     const char speedState[] = { 0x00, 0x01 };
     s.writeRawData(speedState, 2);
 
-    s << (int)(ui->speedToWater->text().toInt() * 10);
+    s << (int)(ui->speedToWater->text().toDouble() * 10);
 
-    s << (int)(ui->speedToGround->text().toInt() * 10);			//speed to ground
+    s << (int)(ui->speedToGround->text().toDouble() * 10);			//speed to ground
 
-    s << (int)(ui->direction->text().toInt() *10);		//drection to groud
+    s << (int)(ui->direction->text().toDouble() *10);		//drection to groud
 
 	const char weatherState[] = { 0x00, 0x1F };
 	s.writeRawData(weatherState, 2);
 
-	s << (short)(ui->trueWindSpeed->text().toInt() * 10);
+	s << (short)(ui->trueWindSpeed->text().toDouble() * 10);
 	s << (short)(ui->trueWindDirection->text().toInt());
 
-    s << (short)(ui->relativeWindSpeed->text().toInt() * 10);
+    s << (short)(ui->relativeWindSpeed->text().toDouble() * 10);
 	s << (short)(ui->relativeWindDirection->text().toInt());
 	
-    s << (short)(ui->temperature->text().toInt() * 10);
-	s << (short)(ui->humidity->text().toInt() * 10);
+    s << (short)(ui->temperature->text().toDouble() * 10);
+	s << (short)(ui->humidity->text().toDouble() * 10);
 
-	s << (short)(ui->pressure->text().toInt() * 10);
+	s << (short)(ui->pressure->text().toDouble() * 10);
 	
 	const char depthState[] = { 0x00, 0x01 };
 	s.writeRawData(depthState, 2);
 
-	s << (short)(ui->depth->text().toInt() * 10);
+	s << (short)(ui->depth->text().toDouble() * 10);
 
     udpTransceiver->SendDataNow(data, ui->ipAddress->text(), ui->ipPort->text().toInt());
 }
@@ -359,9 +359,9 @@ void MainWin::SendUdpInfoOneOnTime() {                      //gps 1 encode
 
     s << (short)1;
     s << (short)0;
-    s << (int)(ui->heading->text().toInt()) * 10;
-    s << (int)(ui->pitchAngle->text().toInt()) * 10;
-    s << (int)(ui->rollAngle->text().toInt()) * 10;
+    s << (int)(ui->heading->text().toDouble() * 10);
+    s << (int)(ui->pitchAngle->text().toDouble() * 10);
+    s << (int)(ui->rollAngle->text().toDouble() * 10);
 
     udpTransceiver->SendDataNow(data, ui->ipAddress->text(), ui->ipPort->text().toInt());
 }
