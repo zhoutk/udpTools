@@ -445,13 +445,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="course_2">
-          <property name="text">
-           <string>bearing indication:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QLabel" name="label_29">
           <property name="text">
            <string>speed</string>
@@ -505,20 +498,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="radarBearingIndication">
-          <item>
-           <property name="text">
-            <string>T</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>R</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
          <widget class="QLineEdit" name="radarVelocity">
           <property name="text">
            <string>1</string>
@@ -551,23 +530,16 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="course_2">
+          <property name="text">
+           <string>bearing indication:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QLabel" name="course_3">
           <property name="text">
            <string>Course indication:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="course_4">
-          <property name="text">
-           <string>CPA:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="course_5">
-          <property name="text">
-           <string>TCPA:</string>
           </property>
          </widget>
         </item>
@@ -618,7 +590,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="radarCourseIndication">
+         <widget class="QComboBox" name="radarBearingIndication">
           <item>
            <property name="text">
             <string>T</string>
@@ -632,17 +604,17 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="radarCPA">
-          <property name="text">
-           <string>0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="radarTCPA">
-          <property name="text">
-           <string>0</string>
-          </property>
+         <widget class="QComboBox" name="radarCourseIndication">
+          <item>
+           <property name="text">
+            <string>T</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>R</string>
+           </property>
+          </item>
          </widget>
         </item>
         <item>
@@ -1271,11 +1243,8 @@
   <tabstop>radarId</tabstop>
   <tabstop>radarSpeed</tabstop>
   <tabstop>radarBatchNumber</tabstop>
-  <tabstop>radarBearingIndication</tabstop>
   <tabstop>btnRadarNew</tabstop>
   <tabstop>radarCourseIndication</tabstop>
-  <tabstop>radarCPA</tabstop>
-  <tabstop>radarTCPA</tabstop>
   <tabstop>radarUnit</tabstop>
   <tabstop>radarName</tabstop>
   <tabstop>radarTrackState</tabstop>

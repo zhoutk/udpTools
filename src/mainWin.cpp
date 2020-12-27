@@ -259,8 +259,8 @@ void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
         .arg(ui->radarVelocity->text().toDouble())												//5 目标速度
         .arg(ui->radarCourse->text().toDouble())		//6 目标航向
         .arg(ui->radarCourseIndication->currentText())		//7 航向指示
-        .arg(ui->radarCPA->text().toDouble())		//8 CPA
-        .arg(ui->radarTCPA->text().toDouble())	//9 TCPA
+        .arg(0)		//8 CPA
+        .arg(0)	//9 TCPA
         .arg(ui->radarUnit->currentText())		//10 单位
         .arg(ui->radarName->text())			//11 名称
         .arg(ui->radarTrackState->currentText())		//12 航迹状态
