@@ -77,7 +77,7 @@
         <item>
          <widget class="QLabel" name="label_13">
           <property name="text">
-           <string>Height:</string>
+           <string>Altitude:</string>
           </property>
          </widget>
         </item>
@@ -112,14 +112,14 @@
         <item>
          <widget class="QLabel" name="label_10">
           <property name="text">
-           <string>Pitch angle:</string>
+           <string>Pitch:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_26">
           <property name="text">
-           <string>Roll angle:</string>
+           <string>Roll:</string>
           </property>
          </widget>
         </item>
@@ -267,7 +267,7 @@
         <item>
          <widget class="QLabel" name="label_39">
           <property name="text">
-           <string>Depth:</string>
+           <string>Sound:</string>
           </property>
          </widget>
         </item>

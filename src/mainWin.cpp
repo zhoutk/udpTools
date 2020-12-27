@@ -300,7 +300,7 @@ void MainWin::SendUdpPackageOnTime() {                  //gps encode
     lon += qSin(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lon * ui->speedToGround->text().toDouble();
     lat += qCos(ui->direction->text().toDouble() * M_PI / 180) * deg_per_m_lat * ui->speedToGround->text().toDouble();
 
-    s << (int)(ui->height->text().toInt());
+    s << (int)(ui->height->text().toDouble());
 
     QTime nTime = QTime::currentTime();
 
