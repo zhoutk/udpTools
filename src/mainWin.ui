@@ -84,14 +84,14 @@
         <item>
          <widget class="QLabel" name="label_31">
           <property name="text">
-           <string>Speed To Water:</string>
+           <string>STW</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
-           <string>Speed To Ground:</string>
+           <string>SOG</string>
           </property>
          </widget>
         </item>
@@ -225,21 +225,21 @@
         <item>
          <widget class="QLabel" name="label_32">
           <property name="text">
-           <string>True Wind Direction:</string>
+           <string>True Wind Course:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_34">
           <property name="text">
-           <string>Relative Wind Speed:</string>
+           <string>Wind Speed Relative:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_35">
           <property name="text">
-           <string>Relative Wind Direction:</string>
+           <string>Wind Course Relative:</string>
           </property>
          </widget>
         </item>
@@ -419,14 +419,14 @@
         <item>
          <widget class="QLabel" name="label_15">
           <property name="text">
-           <string>ID:</string>
+           <string>Device ID:</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_40">
           <property name="text">
-           <string>Batch number:</string>
+           <string>number:</string>
           </property>
          </widget>
         </item>
@@ -805,7 +805,7 @@
         <item>
          <widget class="QLabel" name="label_18">
           <property name="text">
-           <string>ID:</string>
+           <string>Device ID:</string>
           </property>
          </widget>
         </item>
@@ -826,7 +826,7 @@
         <item>
          <widget class="QLabel" name="label_23">
           <property name="text">
-           <string>Speed To Ground:</string>
+           <string>STW</string>
           </property>
          </widget>
         </item>
@@ -847,7 +847,7 @@
         <item>
          <widget class="QLabel" name="label_24">
           <property name="text">
-           <string>Course To Ground:</string>
+           <string>COG</string>
           </property>
          </widget>
         </item>
