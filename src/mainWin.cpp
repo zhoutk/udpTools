@@ -242,8 +242,9 @@ void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
     int id = ui->radarId->text().toInt();
 
     QTime nTime = QTime::currentTime();
+    QString uctHour = QDateTime::currentDateTime().toUTC().toString("hh");
     QString timeStr = QString("%1%2%3.%4")
-        .arg(QString("%1").arg(nTime.hour(), 2, 10, QLatin1Char('0')))
+        .arg(QString("%1").arg(uctHour.toInt(), 2, 10, QLatin1Char('0')))
         .arg(QString("%1").arg(nTime.minute(), 2, 10, QLatin1Char('0')))
         .arg(QString("%1").arg(nTime.second(), 2, 10, QLatin1Char('0')))
         .arg(QString("%1").arg(nTime.msec(), 3, 10, QLatin1Char('0')))
