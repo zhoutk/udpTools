@@ -532,7 +532,7 @@
         <item>
          <widget class="QLabel" name="label_82">
           <property name="text">
-           <string>(hpa)</string>
+           <string>(m)</string>
           </property>
          </widget>
         </item>
