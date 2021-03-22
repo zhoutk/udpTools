@@ -181,8 +181,11 @@ void MainWin::AisSendUdpDynamicPackageOnTime() {
 
 	udpTransceiver->SendDataNow(data, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
 
-    aisLon += qSin(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
-    aisLat += qCos(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
+	double deg_per_m_lon, deg_per_m_lat;
+	calc_deg_per_m(aisLat, aisLon, deg_per_m_lat, deg_per_m_lon);
+
+    aisLon += qSin(ui->aisDirection->text().toDouble() * M_PI / 180) * deg_per_m_lon * ui->aisSpeed->text().toDouble();
+    aisLat += qCos(ui->aisDirection->text().toDouble() * M_PI / 180) * deg_per_m_lat * ui->aisSpeed->text().toDouble();
 }
 
 void MainWin::BtnAisSpinChange(int value) {
