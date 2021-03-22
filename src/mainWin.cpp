@@ -138,8 +138,8 @@ void MainWin::AisSendUdpStaticPackageOnTime() {
 
 	udpTransceiver->SendDataNow(data, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
 
-	aisLon += qSin(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
-	aisLat += qCos(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
+	//aisLon += qSin(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
+	//aisLat += qCos(ui->aisDirection->text().toDouble() * M_PI / 180) * speeDeta * ui->aisSpeed->text().toDouble();
 }
 
 void MainWin::AisSendUdpDynamicPackageOnTime() {
