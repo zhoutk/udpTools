@@ -48,7 +48,8 @@ public slots:
 
 private:
     Ui::MainWin*ui;
-    QTimer udpTimer;
+	QTimer udpTimer;
+    QTimer udpTimer2;
     UDPTransceiver* udpTransceiver;
     double lon;
     double lat;

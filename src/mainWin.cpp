@@ -18,7 +18,7 @@ static void calc_deg_per_m(double latMid, double lonMid, double &deg_per_m_lat, 
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-    , speeDeta(0.0001), udpTimer(this), radarUdpTimer(this), aisUdpTimer(this)
+    , speeDeta(0.0001), udpTimer(this), udpTimer2(this), radarUdpTimer(this), aisUdpTimer(this)
 {
     ui->setupUi(this);
     udpTransceiver = new UDPTransceiver(this);
@@ -34,7 +34,7 @@ MainWin::MainWin(QWidget *parent)
     connect(ui->btnStop, SIGNAL(clicked()), this, SLOT(BtnStopClicked()));
     connect(ui->spinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnSpinChange(int)));
     connect(&udpTimer, SIGNAL(timeout()), this, SLOT(SendUdpPackageOnTime()));
-    connect(&udpTimer, SIGNAL(timeout()), this, SLOT(SendUdpInfoOneOnTime()));
+    connect(&udpTimer2, SIGNAL(timeout()), this, SLOT(SendUdpInfoOneOnTime()));
 
     connect(ui->btnRadarStart, SIGNAL(clicked()), this, SLOT(BtnRadarStartClicked()));
     connect(ui->btnRadarStop, SIGNAL(clicked()), this, SLOT(BtnRadarStopClicked()));
@@ -368,6 +368,8 @@ void MainWin::SendUdpInfoOneOnTime() {                      //gps 1 encode
 void MainWin::BtnSpinChange(int value) {
     udpTimer.stop();
     udpTimer.start(ui->spinBox->text().toInt() * 1000);
+	udpTimer2.stop();
+	udpTimer2.start(ui->spinBox->text().toInt() * 20);
 }
 
 void MainWin::BtnStartClicked() {
@@ -377,14 +379,16 @@ void MainWin::BtnStartClicked() {
     lon = ui->Lon->text().toDouble();
     lat = ui->Lat->text().toDouble();
 
-    udpTimer.start(ui->spinBox->text().toInt() * 1000);
+	udpTimer.start(ui->spinBox->text().toInt() * 1000);
+    udpTimer2.start(ui->spinBox->text().toInt() * 20);
 }
 
 void MainWin::BtnStopClicked() {
     ui->btnStop->setEnabled(false);
     ui->btnStart->setEnabled(true);
 
-    udpTimer.stop();
+	udpTimer.stop();
+    udpTimer2.stop();
 }
 
 void ParseDatagrams(QByteArray& d)
