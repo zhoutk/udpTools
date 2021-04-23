@@ -55,7 +55,7 @@ MainWin::MainWin(QWidget *parent)
     connect(ui->btnAisNew, SIGNAL(clicked()), this, SLOT(BtnAisCreateClicked()));
 	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpFromLogOnTime()));
 
-	QString aFile = QDir::currentPath();
+	//QString aFile = QDir::currentPath();
 	QFile file("./aislog.txt");
 	bool ok = file.open(QIODevice::ReadOnly | QIODevice::Text);
 

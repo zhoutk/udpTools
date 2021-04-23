@@ -180,14 +180,14 @@
         <item>
          <widget class="QLineEdit" name="Lon">
           <property name="text">
-           <string>61</string>
+           <string>122</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="Lat">
           <property name="text">
-           <string>-32.5</string>
+           <string>31</string>
           </property>
          </widget>
         </item>
@@ -1168,14 +1168,14 @@
         <item>
          <widget class="QLineEdit" name="aisLon">
           <property name="text">
-           <string>61</string>
+           <string>122</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="aisLat">
           <property name="text">
-           <string>-32.5</string>
+           <string>31</string>
           </property>
          </widget>
         </item>
