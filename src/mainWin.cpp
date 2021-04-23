@@ -1,5 +1,7 @@
 #include <QtMath>
 #include "mainWin.h"
+#include <QFile>
+#include <QDir>
 
 static void ParseDatagrams(QByteArray& d);
 
@@ -48,9 +50,31 @@ MainWin::MainWin(QWidget *parent)
     connect(ui->btnAisStart, SIGNAL(clicked()), this, SLOT(BtnAisStartClicked()));
     connect(ui->btnAisStop, SIGNAL(clicked()), this, SLOT(BtnAisStopClicked()));
     connect(ui->aisSpinBox, SIGNAL(valueChanged(int)), this, SLOT(BtnAisSpinChange(int)));
-	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpDynamicPackageOnTime()));
-	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpStaticPackageOnTime()));
+	/*connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpDynamicPackageOnTime()));
+	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpStaticPackageOnTime()));*/
     connect(ui->btnAisNew, SIGNAL(clicked()), this, SLOT(BtnAisCreateClicked()));
+	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpFromLogOnTime()));
+
+	QString aFile = QDir::currentPath();
+	QFile file("./aislog.txt");
+	bool ok = file.open(QIODevice::ReadOnly | QIODevice::Text);
+
+	while (ok && !file.atEnd()) {
+		QByteArray line = file.readLine();
+		aisLogs.push_back(line);
+	}
+
+}
+
+void MainWin::AisSendUdpFromLogOnTime(){
+	QByteArray aisHeader = "UdPbC";//"\00\\s:AI4335,n:620*0C\\";
+	aisHeader.resize(6);
+	aisHeader[5] = 0x00;
+	aisHeader.append("\\s:AI4335,n:620*0C\\");
+	foreach(QByteArray al, aisLogs){
+		al.insert(0, aisHeader);
+		udpTransceiver->SendDataNow(al, ui->aisIpAddress->text(), ui->aisIpPort->text().toInt());
+	}
 }
 
 void MainWin::BtnAisCreateClicked() {

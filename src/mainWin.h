@@ -11,6 +11,7 @@
 #include "math.h"
 #include "QByteArray"
 #include "network/udptransceiver.h"
+#include "QVector"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWin; }
@@ -43,6 +44,7 @@ public slots:
 	void AisSendUdpDynamicPackageOnTime();
 	void AisSendUdpStaticPackageOnTime();
 	void BtnAisSpinChange(int);
+	void AisSendUdpFromLogOnTime();
 
     void CalcRadarTargetInfo();
 
@@ -60,5 +62,7 @@ private:
 	QTimer aisUdpTimer;
 	double aisLon;
 	double aisLat;
+
+	QVector<QByteArray> aisLogs;
 };
 #endif // MAINWIN_H
