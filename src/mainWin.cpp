@@ -281,7 +281,7 @@ void MainWin::RadarSendUdpPackageOnTime() {                 //radar encode
         .arg(ui->radarId->text().remove("_"))
         .arg(id)
         .arg(ui->radarBatchNumber->text().toInt())                                //1 批号
-        .arg(g_radarDist)											//2 距离
+        .arg(g_radarDist/1852.0)											//2 距离
         .arg(g_radarBear) 										//3 方位
         .arg(ui->radarBearingIndication->currentText())										//4 方位指示
         .arg(ui->radarVelocity->text().toDouble())												//5 目标速度
