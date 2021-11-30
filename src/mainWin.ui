@@ -865,12 +865,12 @@
          <widget class="QComboBox" name="radarUnit">
           <item>
            <property name="text">
-            <string>K</string>
+            <string>N</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>N</string>
+            <string>K</string>
            </property>
           </item>
           <item>
