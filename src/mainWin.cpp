@@ -358,9 +358,9 @@ void MainWin::SendUdpInfoOneOnTime() {                      //gps 1 encode
 
     s << (short)1;
     s << (short)0;
-    s << (int)(ui->heading->text().toDouble() * 10);
-    s << (int)(ui->pitchAngle->text().toDouble() * 10);
-    s << (int)(ui->rollAngle->text().toDouble() * 10);
+    s << (int)(ui->heading->text().toDouble() * 600);
+    s << (int)(ui->pitchAngle->text().toDouble() * 600);
+    s << (int)(ui->rollAngle->text().toDouble() * 600);
 
     udpTransceiver->SendDataNow(data, ui->ipAddress->text(), ui->ipPort->text().toInt());
 }
