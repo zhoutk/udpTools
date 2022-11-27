@@ -8,8 +8,10 @@ project(udpTools VERSION 0.1.0)
 # set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # set(CMAKE_CXX_EXTENSIONS OFF)
 
+message(test-env-var-QTDIR -----------> $ENV{QTDIR})
+set(CMAKE_PREFIX_PATH $ENV{QTDIR})
+
 if(MSVC)
-	set(CMAKE_PREFIX_PATH C:/Qt/Qt5.12.9/5.12.9/msvc2017)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup") 
 elseif(UNIX)
 	set(CMAKE_PREFIX_PATH /home/zhoutk/Qt5.12.9/5.12.9/gcc_64)

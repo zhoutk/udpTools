@@ -369,7 +369,7 @@ void MainWin::BtnSpinChange(int value) {
     udpTimer.stop();
     udpTimer.start(ui->spinBox->text().toInt() * 1000);
 	udpTimer2.stop();
-	udpTimer2.start(ui->spinBox->text().toInt() * 20);
+	udpTimer2.start(ui->spinBox->text().toInt() * 1000);
 }
 
 void MainWin::BtnStartClicked() {
@@ -380,7 +380,7 @@ void MainWin::BtnStartClicked() {
     lat = ui->Lat->text().toDouble();
 
 	udpTimer.start(ui->spinBox->text().toInt() * 1000);
-    udpTimer2.start(ui->spinBox->text().toInt() * 20);
+    udpTimer2.start(ui->spinBox->text().toInt() * 1000);
 }
 
 void MainWin::BtnStopClicked() {
