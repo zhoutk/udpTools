@@ -9,6 +9,8 @@ double g_radarDist = 0;
 double g_radarBear = 0;
 double g_timeElapsed = 0;
 
+QVector<NaviRadar> nradars;
+
 static void calc_deg_per_m(double latMid, double lonMid, double &deg_per_m_lat, double &deg_per_m_lon)
 {
     deg_per_m_lat = 1.0 / (111132.954 - 559.822 * cos( 2 * latMid ) + 1.175 * cos( 4 * latMid));
@@ -18,7 +20,8 @@ static void calc_deg_per_m(double latMid, double lonMid, double &deg_per_m_lat, 
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWin)
-    , speeDeta(0.0001), udpTimer(this), udpTimer2(this), radarUdpTimer(this), aisUdpTimer(this)
+    , speeDeta(0.0001), udpTimer(this), udpTimer2(this), radarUdpTimer(this), 
+    aisUdpTimer(this), nradarTimer(this)
 {
     ui->setupUi(this);
     udpTransceiver = new UDPTransceiver(this);
@@ -51,6 +54,11 @@ MainWin::MainWin(QWidget *parent)
 	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpDynamicPackageOnTime()));
 	connect(&aisUdpTimer, SIGNAL(timeout()), this, SLOT(AisSendUdpStaticPackageOnTime()));
     connect(ui->btnAisNew, SIGNAL(clicked()), this, SLOT(BtnAisCreateClicked()));
+
+    ui->btnNRadarStop->setEnabled(false);
+	connect(ui->btnNRadarStart, SIGNAL(clicked()), this, SLOT(BtnNRadarStartClicked()));
+	connect(ui->btnNRadarStop, SIGNAL(clicked()), this, SLOT(BtnNRadarStopClicked()));
+	connect(&nradarTimer, SIGNAL(timeout()), this, SLOT(NRadarSendOnTime()));
 }
 
 void MainWin::BtnAisCreateClicked() {
@@ -370,6 +378,68 @@ void MainWin::BtnSpinChange(int value) {
     udpTimer.start(ui->spinBox->text().toInt() * 1000);
 	udpTimer2.stop();
 	udpTimer2.start(ui->spinBox->text().toInt() * 1000);
+}
+
+void MainWin::BtnNRadarStartClicked()
+{
+	ui->btnNRadarStart->setEnabled(false);
+	ui->btnNRadarStop->setEnabled(true);
+
+    qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+    nradars.clear();
+    int nsize = ui->nradarNum->text().toInt();
+    for (int i = 0; i < nsize; i++)
+    {
+        NaviRadar al;
+        al.id = 1000 + qrand() % 1000;
+        al.threatLevel = qrand() % 4;
+		al.IFF = qrand() % 4;
+		al.aimType = qrand() % 16;
+		al.hasWarning = qrand() % 2;
+		
+        al.direction = (qrand() % 3600) / 9.9;
+        al.dist = (qrand() % 10000) / 9.9;
+		al.aimDirect = (qrand() % 3600) / 9.9;
+		al.aimSpeed = (qrand() % 50) / 9.9;
+		al.upAngle = (qrand() % 900) / 9.9;
+        al.height = (qrand() % 2000) / 9.9 + 10;
+		nradars.push_back(al);
+	}
+    nradarTimer.start(1000);
+}
+
+void MainWin::BtnNRadarStopClicked()
+{
+	ui->btnNRadarStop->setEnabled(false);
+	ui->btnNRadarStart->setEnabled(true);
+
+    nradarTimer.stop();
+}
+
+void MainWin::NRadarSendOnTime()
+{
+    QString timeStr = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+    for (auto &al : nradars) {
+        al.dist = qAbs(al.dist + qSin(al.aimDirect - al.direction) * al.aimSpeed);
+        al.direction += (al.aimDirect - al.direction) / 1000.0 / al.aimSpeed;
+		QString dataPacket = QString("$NRADAR,%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12\r\n")
+			.arg(al.id)                                                 //1 批号
+			.arg(al.threatLevel)                                        //2 威胁等级                                  
+			.arg(al.IFF)						    					//3 敌我属性
+			.arg(al.aimType)     										//4 类型
+			.arg(al.hasWarning)										    //5 告警标志
+			.arg(al.direction)											//6 方位
+			.arg(al.dist)                                       		//7 距离
+			.arg(al.aimDirect)                                  		//8 绝对航向
+			.arg(al.aimSpeed)                                       	//9 绝对速度
+			.arg(al.upAngle)                                    		//10 仰角
+			.arg(al.height)                                 			//11 高度
+			.arg(timeStr)                               		        //12 发现时间
+			;
+
+		QByteArray ba(dataPacket.toStdString().c_str(), dataPacket.size());
+		udpTransceiver->SendDataNow(ba, ui->nradarIp->text(), ui->nradarPort->text().toInt());
+    }
 }
 
 void MainWin::BtnStartClicked() {

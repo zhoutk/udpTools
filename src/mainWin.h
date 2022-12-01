@@ -8,6 +8,7 @@
 #include <QTimer>
 #include <QTime>
 #include <QtMath>
+#include <QVector>
 #include "math.h"
 #include "QByteArray"
 #include "network/udptransceiver.h"
@@ -15,6 +16,22 @@
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWin; }
 QT_END_NAMESPACE
+
+class NaviRadar {
+public:
+	int id;					//01 - 目标批号	1000+
+	int threatLevel;		//02 - 威胁等级	3
+	int IFF;				//03 - 敌我属性	3
+	int aimType;			//04 - 目标类型	15
+	int hasWarning;			//05 - 告警标志	1
+							   
+	double direction;		//06 - 目标方位
+	double dist;			//07 - 目标距离
+	double aimDirect;		//08 - 目标绝对航向
+	double aimSpeed;		//09 - 目标绝对速度
+	double upAngle;			//10 - 仰角
+	double height;			//11 - 高度
+};
 
 class MainWin : public QWidget
 {
@@ -25,6 +42,10 @@ public:
     ~MainWin();
 
 public slots:
+	void BtnNRadarStartClicked();
+	void BtnNRadarStopClicked();
+	void NRadarSendOnTime();
+
     void BtnStartClicked();
     void BtnStopClicked();
 	void SendUdpPackageOnTime();
@@ -60,5 +81,8 @@ private:
 	QTimer aisUdpTimer;
 	double aisLon;
 	double aisLat;
+
+	QTimer nradarTimer;
+
 };
 #endif // MAINWIN_H
