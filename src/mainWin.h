@@ -22,15 +22,16 @@ public:
 	int id;					//01 - 目标批号	1000+
 	int threatLevel;		//02 - 威胁等级	3
 	int IFF;				//03 - 敌我属性	3
-	int aimType;			//04 - 目标类型	15
-	int hasWarning;			//05 - 告警标志	1
+	QString state;			//04 - 国家代号
+	int aimType;			//05 - 目标类型	15
+	int hasWarning;			//06 - 告警标志	1
 							   
-	double direction;		//06 - 目标方位
-	double dist;			//07 - 目标距离
-	double aimDirect;		//08 - 目标绝对航向
-	double aimSpeed;		//09 - 目标绝对速度
-	double upAngle;			//10 - 仰角
-	double height;			//11 - 高度
+	double direction;		//07 - 目标方位
+	double dist;			//08 - 目标距离
+	double aimDirect;		//09 - 目标绝对航向
+	double aimSpeed;		//10 - 目标绝对速度
+	double upAngle;			//11 - 仰角
+	double height;			//12 - 高度
 };
 
 class MainWin : public QWidget

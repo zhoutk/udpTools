@@ -10,6 +10,7 @@ double g_radarBear = 0;
 double g_timeElapsed = 0;
 
 QVector<NaviRadar> nradars;
+QStringList STATESLIST;
 
 static void calc_deg_per_m(double latMid, double lonMid, double &deg_per_m_lat, double &deg_per_m_lon)
 {
@@ -23,6 +24,25 @@ MainWin::MainWin(QWidget *parent)
     , speeDeta(0.0001), udpTimer(this), udpTimer2(this), radarUdpTimer(this), 
     aisUdpTimer(this), nradarTimer(this)
 {
+    STATESLIST
+        << "CN"
+        << "US"
+        << "UK"
+        << "IT"
+        << "KR"
+        << "JP"
+		<< "CA"
+		<< "ES"
+		<< "AU"
+		<< "GR"
+		<< "KP"
+		<< "AR"
+		<< "BT"
+		<< "DK"
+		<< "KZ"
+		<< "JO"
+        ;
+
     ui->setupUi(this);
     udpTransceiver = new UDPTransceiver(this);
     udpTransceiver->SetDatagramProcessor(ParseDatagrams);
@@ -394,6 +414,7 @@ void MainWin::BtnNRadarStartClicked()
         al.id = 1000 + qrand() % 1000;
         al.threatLevel = qrand() % 4;
 		al.IFF = qrand() % 4;
+        al.state = STATESLIST[qrand() % 16];
 		al.aimType = qrand() % 16;
 		al.hasWarning = qrand() % 2;
 		
@@ -422,19 +443,20 @@ void MainWin::NRadarSendOnTime()
     for (auto &al : nradars) {
         al.dist = qAbs(al.dist + qSin(al.aimDirect - al.direction) * al.aimSpeed);
         al.direction += (al.aimDirect - al.direction) / 1000.0 / al.aimSpeed;
-		QString dataPacket = QString("$NRADAR,%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12\r\n")
+		QString dataPacket = QString("$NRADAR,%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13\r\n")
 			.arg(al.id)                                                 //1 批号
 			.arg(al.threatLevel)                                        //2 威胁等级                                  
 			.arg(al.IFF)						    					//3 敌我属性
-			.arg(al.aimType)     										//4 类型
-			.arg(al.hasWarning)										    //5 告警标志
-			.arg(al.direction)											//6 方位
-			.arg(al.dist)                                       		//7 距离
-			.arg(al.aimDirect)                                  		//8 绝对航向
-			.arg(al.aimSpeed)                                       	//9 绝对速度
-			.arg(al.upAngle)                                    		//10 仰角
-			.arg(al.height)                                 			//11 高度
-			.arg(timeStr)                               		        //12 发现时间
+            .arg(al.state)                                              //4 国家代号
+			.arg(al.aimType)     										//5 类型
+			.arg(al.hasWarning)										    //6 告警标志
+			.arg(al.direction)											//7 方位
+			.arg(al.dist)                                       		//8 距离
+			.arg(al.aimDirect)                                  		//9 绝对航向
+			.arg(al.aimSpeed)                                       	//10 绝对速度
+			.arg(al.upAngle)                                    		//11 仰角
+			.arg(al.height)                                 			//12 高度
+			.arg(timeStr)                               		        //13 发现时间
 			;
 
 		QByteArray ba(dataPacket.toStdString().c_str(), dataPacket.size());
